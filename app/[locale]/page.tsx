@@ -46,8 +46,6 @@ export default async function Home() {
   const locale = c_s.get("NEXT_LOCALE")?.value ?? undefined;
   const page_data = await get_page_data({ locale });
   const product_data = await get_products({ locale });
-  const user_data = c_s.get("user_data")?.value ?? null;
-
   const t = await getTranslations("Shared");
   // const testimonials = await get_testimonials({ locale });
   // extract data needed for components
@@ -67,7 +65,6 @@ export default async function Home() {
   return (
     <main className="min-h-screen w-full h-full mx-auto">
       <HomePageClientWrapper
-        user_data={user_data}
         page_data={page_data}
         science_section_title={science_section_title}
         science_array={science_array}

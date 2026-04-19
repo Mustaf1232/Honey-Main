@@ -1,6 +1,5 @@
 "use client"
 
-import { useState, useEffect } from "react"
 import { HoneyShopLandingComponent } from "./honey-shop-landing"
 import InfoSection from "./info-section"
 import PresentationSection from "./presentation-section"
@@ -12,15 +11,6 @@ import type { Children } from "./rich-text/serialize"
 import type { StudyArray } from "./science-section"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogFooter,
-} from "@/components/ui/dialog"
-import { PercentIcon } from "lucide-react"
 
 export type Testimonial = {
   testimonial_author: string
@@ -39,8 +29,6 @@ const HomePageClientWrapper = ({
   product_data,
   order_button,
   recipe_section_paragraph,
-  
-  user_data,
 }: {
   page_data: HomePageData
   science_section_title: Children
@@ -50,22 +38,7 @@ const HomePageClientWrapper = ({
   order_button: string
   product_data: AllProducts
   recipe_section_paragraph: Children
-  
-  user_data: string | null
 }) => {
-  const [showSignupModal, setShowSignupModal] = useState(false)
-
-  useEffect(() => {
-    // Show modal only if user is not logged in
-    if (user_data === null) {
-      // Small delay to ensure the modal doesn't appear immediately on page load
-      const timer = setTimeout(() => {
-        setShowSignupModal(true)
-      }, 1500)
-
-      return () => clearTimeout(timer)
-    }
-  }, [user_data])
 
   return (
     <main className="min-h-screen w-full h-full mx-auto">
@@ -90,36 +63,6 @@ const HomePageClientWrapper = ({
         </Button>
       </Link>
 
-      {/* Signup Discount Modal */}
-      <Dialog open={showSignupModal} onOpenChange={setShowSignupModal}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-xl">
-              <PercentIcon className="h-5 w-5 text-red-900" />
-              Special Offer for New Customers
-            </DialogTitle>
-            <DialogDescription className="pt-2 text-base">
-              Sign up today and receive <span className="font-bold text-red-900">10% off</span> your first order!
-            </DialogDescription>
-          </DialogHeader>
-          <div className="py-4">
-            <p>Join our community of honey lovers and enjoy exclusive benefits:</p>
-            <ul className="list-disc pl-5 mt-2 space-y-1">
-              <li>10% discount on your first purchase</li>
-              <li>Early access to seasonal products</li>
-              <li>Track your orders easily</li>
-            </ul>
-          </div>
-          <DialogFooter className="sm:justify-between flex-col sm:flex-row gap-2">
-            <Button variant="outline" onClick={() => setShowSignupModal(false)}>
-              Maybe Later
-            </Button>
-            <Link href="/account">
-              <Button className="w-full sm:w-auto rounded-full bg-red-900 hover:bg-red-800">Sign Up Now</Button>
-            </Link>
-          </DialogFooter>
-        </DialogContent>
-      </Dialog>
     </main>
   )
 }
