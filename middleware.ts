@@ -1,12 +1,5 @@
 import createMiddleware from "next-intl/middleware";
 
-// Edge Runtime does not have __dirname — polyfill it so any bundled code
-// that references it doesn't throw a ReferenceError at runtime.
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-if (typeof (globalThis as any).__dirname === "undefined") {
-  (globalThis as any).__dirname = "/";
-}
-
 export default createMiddleware({
   locales: ["bs", "en"],
   defaultLocale: "bs",
