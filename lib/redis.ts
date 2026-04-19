@@ -1,19 +1,21 @@
-import Redis from "ioredis";
+import { createClient } from "redis";
 
-let client: Redis | null = null;
+const redis_client = createClient({
+  socket: {
+    host: process.env.REDIS_HOST as string,
+    port: parseInt(process.env.REDIS_PORT || "6379"),
+  },
+  password: process.env.REDIS_PASSWORD as string,
+});
 
-export function get_redis_client(): Redis {
-  if (!client) {
-    client = new Redis({
-      //@ts-expect-error: types are not correct
-      port: process.env.REDIS_PORT as number,
-      host: process.env.REDIS_HOST as string,
-      password: process.env.REDIS_PASSWORD as string,
-      showFriendlyErrorStack: false,
-      lazyConnect: true,
-    });
-  }
-  return client;
+redis_client.on("error", (err) => {
+  console.error("Redis client error:", err.message);
+});
+
+if (!redis_client.isOpen) {
+  redis_client.connect().catch((err) => {
+    console.error("Redis connect error:", err.message);
+  });
 }
 
-export const redis_client = get_redis_client();
+export { redis_client };
