@@ -6,6 +6,13 @@ const nextConfig = {
   experimental: {
     serverComponentsExternalPackages: ["ioredis"],
   },
+  webpack: (config, { isServer }) => {
+    if (isServer) {
+      const existing = Array.isArray(config.externals) ? config.externals : [];
+      config.externals = [...existing, "ioredis"];
+    }
+    return config;
+  },
   images: {
     remotePatterns: [
       {
