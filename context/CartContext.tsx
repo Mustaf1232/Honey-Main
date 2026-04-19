@@ -24,7 +24,7 @@ export type CartContextType = {
     price: string;
     currency: string;
     shipping: string | null;
-  }) => void;
+  }, options?: { onSuccess?: () => void; onError?: (error: Error) => void }) => void;
   add_to_cart_loading: boolean;
   add_to_cart_error: boolean;
   clear_cart_contents: (variables: { cart_key: string }) => void;

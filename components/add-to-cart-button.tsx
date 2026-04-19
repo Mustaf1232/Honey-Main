@@ -27,13 +27,15 @@ export default function AddToCartWithCounter({
   currency: string;
   shipping: string;
 }) {
-  const { add_to_cart } = useCart();
+  const { add_to_cart, cart_data } = useCart();
   const router = useRouter();
 
   const [count, setCount] = useState(initialCount);
 
   const increment = () => setCount((prev) => prev + 1);
   const decrement = () => setCount((prev) => Math.max(1, prev - 1));
+
+  const alreadyInCart = cart_data?.items?.some((item) => item.id === product_id) ?? false;
 
   const handleAddToCart = () => {
     add_to_cart({
@@ -50,17 +52,23 @@ export default function AddToCartWithCounter({
   };
 
   const handleBuyNow = () => {
-    add_to_cart({
-      product_sale_price,
-      product_name,
-      product_picture_url,
-      product_id,
-      quantity: count,
-      price,
-      currency,
-      shipping,
-    });
-    router.push("/checkout");
+    if (alreadyInCart) {
+      router.push("/checkout");
+      return;
+    }
+    add_to_cart(
+      {
+        product_sale_price,
+        product_name,
+        product_picture_url,
+        product_id,
+        quantity: count,
+        price,
+        currency,
+        shipping,
+      },
+      { onSuccess: () => router.push("/checkout") },
+    );
   };
 
   return (
