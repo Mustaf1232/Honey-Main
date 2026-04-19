@@ -145,6 +145,30 @@ export async function user_signout() {
   }
 }
 
+// update user
+export async function update_user(fields: {
+  user_name?: string;
+  user_last_name?: string;
+  user_phone_number?: string;
+  user_birthday?: string;
+}) {
+  const user_token = await get_user_token();
+  const user_data = cookies().get("user_data")?.value;
+  if (!user_token || !user_data) throw new Error("User not authenticated");
+  const user = JSON.parse(user_data);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/users/${user.id}`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${user_token}`,
+    },
+    body: JSON.stringify(fields),
+  });
+  const data = await res.json();
+  cookies().set("user_data", JSON.stringify({ ...user, ...fields }));
+  return data;
+}
+
 // retrieve user orders
 export const retrieve_user_orders = async () => {
   let user_id = null;

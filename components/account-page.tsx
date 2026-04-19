@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import type { AuthFormTranslations } from "@/components/auth-form"
 import { LogOut } from "lucide-react"
-import { user_signout } from "@/app/[locale]/account/actions"
+import { user_signout, update_user } from "@/app/[locale]/account/actions"
 import { useRouter } from "next/navigation"
 import { useToast } from "@/hooks/use-toast"
 import { useUserContext } from "@/context/UserContext"
@@ -28,17 +28,43 @@ export default function AccountPage({
   const { user_orders, user_orders_loading, user_order_error } = useUserContext()
 
   const [user, setUser] = useState({
-    name: user_info.user_name,
-    last_name: user_info.user_last_name,
+    name: user_info.user_name || "",
+    last_name: user_info.user_last_name || "",
     phone: user_info.user_phone_number || "",
     email: user_info.user_email || "",
+    birthday: user_info.user_birthday || "",
   })
+  const [isSaving, setIsSaving] = useState(false)
 
   const router = useRouter()
   const { toast } = useToast()
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value })
   }
+  const handle_save_changes = async () => {
+    setIsSaving(true)
+    try {
+      await update_user({
+        user_name: user.name,
+        user_last_name: user.last_name,
+        user_phone_number: user.phone,
+        user_birthday: user.birthday,
+      })
+      toast({
+        title: "Saved",
+        description: "Your information has been updated successfully.",
+      })
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "Failed to save changes. Please try again.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsSaving(false)
+    }
+  }
+
   const handle_user_signout = async () => {
     try {
       await user_signout()
@@ -85,15 +111,30 @@ export default function AccountPage({
             />
           </div>
           <div className="space-y-2">
+            <Label htmlFor="birthday">{translations.birthday}</Label>
+            <Input
+              id="birthday"
+              name="birthday"
+              type="date"
+              max={new Date().toISOString().split("T")[0]}
+              value={user.birthday}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
             <Input id="email" name="email" value={user.email} disabled className="bg-gray-100 cursor-not-allowed" />
           </div>
         </CardContent>
-        {/* <CardFooter>
-          <Button className="rounded-full bg-red-900">
-            {translations.save_changes}
+        <div className="px-6 pb-6">
+          <Button
+            className="rounded-full bg-red-900"
+            onClick={handle_save_changes}
+            disabled={isSaving}
+          >
+            {isSaving ? "Saving..." : translations.save_changes}
           </Button>
-        </CardFooter> */}
+        </div>
       </Card>
 
       <Card>
