@@ -3,6 +3,9 @@ const withNextIntl = createNextIntlPlugin();
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    serverComponentsExternalPackages: ["ioredis"],
+  },
   images: {
     remotePatterns: [
       {
