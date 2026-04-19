@@ -8,7 +8,7 @@ import Footer from "@/components/footer";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 //react query
 import ReactQueryClientProvider from "@/lib/query-provider";
 // above header
@@ -86,7 +86,7 @@ export default async function RootLayout({
   params: { locale: string };
 }>) {
   const contact_info = await get_contact_info();
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const messages = await getMessages();
   const menu = await get_menu(locale);
   const c_s = cookies();

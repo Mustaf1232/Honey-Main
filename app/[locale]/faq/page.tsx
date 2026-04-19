@@ -1,12 +1,12 @@
 import FaqComponent from "@/components/faq-component";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import { getTranslations } from "next-intl/server";
 const FaqPage = async ({
   params: { locale },
 }: {
   params: { locale: string };
 }) => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations("Faq");
   const translations = {
     search_faqs: t("search_faqs"),

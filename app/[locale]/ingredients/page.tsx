@@ -1,5 +1,5 @@
 import IngredientListItem from "@/components/image-list-ingredient";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 import type { Ingredient } from "@/types";
 
 const IngredientPage = async ({
@@ -7,7 +7,7 @@ const IngredientPage = async ({
 }: {
   params: { locale: string };
 }) => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const get_ingredients = async () => {
     try {
       const response = await fetch(

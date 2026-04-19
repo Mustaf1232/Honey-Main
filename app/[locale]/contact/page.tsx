@@ -1,7 +1,7 @@
 import ContactForm from "@/components/contact-form";
 
 import { getTranslations } from "next-intl/server";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 const get_contact_info = async () => {
   try {
     const response = await fetch(
@@ -19,7 +19,7 @@ const ContactPage = async ({
 }: {
   params: { locale: string };
 }) => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations("Contact");
   const translations = {
     contact_us: t("contact_us"),

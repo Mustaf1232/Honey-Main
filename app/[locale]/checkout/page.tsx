@@ -3,14 +3,14 @@
 import CheckoutForm from "../../../components/checkout-form";
 
 import { getTranslations } from "next-intl/server";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 
 const Checkout = async ({
   params: { locale },
 }: {
   params: { locale: string };
 }) => {
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations("Checkout");
   const translations = {
     page_title: t("page_title"),

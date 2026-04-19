@@ -1,3 +1,4 @@
+import { setRequestLocale } from "next-intl/server";
 import RichText from "@/components/rich-text";
 
 const PolicyPrivacyPage = async ({
@@ -5,6 +6,8 @@ const PolicyPrivacyPage = async ({
 }: {
   params: { locale: string };
 }) => {
+  setRequestLocale(locale);
+
   const get_privacy_policy_data = async () => {
     try {
       const response = await fetch(

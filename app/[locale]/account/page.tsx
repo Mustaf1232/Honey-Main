@@ -3,7 +3,7 @@ import AccountPage from "@/components/account-page";
 import AuthForm from "@/components/auth-form";
 import { cookies } from "next/headers";
 import { getTranslations } from "next-intl/server";
-import { unstable_setRequestLocale } from "next-intl/server";
+import { setRequestLocale } from "next-intl/server";
 const AuthPage = async ({
   params: { locale },
 }: {
@@ -12,7 +12,7 @@ const AuthPage = async ({
   const c_store = cookies();
   const user_token = c_store.get("user_token")?.value ?? null;
   const user_data = c_store.get("user_data")?.value ?? null;
-  unstable_setRequestLocale(locale);
+  setRequestLocale(locale);
   const t = await getTranslations("Account");
   const translations = {
     login: t("login"),
