@@ -25,6 +25,7 @@ type RegisterFormData = {
   user_name: string;
   user_last_name: string;
   user_phone_number: string;
+  user_birthday: string;
   email: string;
   password: string;
   confirm_password: string;
@@ -48,6 +49,7 @@ export type AuthFormTranslations = {
   save_changes: string;
   sign_out: string;
   registering: string;
+  birthday: string;
 };
 export default function AuthForm({
   translations,
@@ -74,9 +76,10 @@ export default function AuthForm({
       user_name: data.user_name,
       user_last_name: data.user_last_name,
       user_phone_number: data.user_phone_number,
+      user_birthday: data.user_birthday,
       password: data.password,
       email: data.email,
-      first_order : true , 
+      first_order: true,
     };
     try {
       const res = await create_user(create_user_object);
@@ -220,6 +223,22 @@ export default function AuthForm({
                   {registerForm.formState.errors.user_phone_number && (
                     <p className="text-sm text-red-500">
                       {registerForm.formState.errors.user_phone_number.message}
+                    </p>
+                  )}
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="user_birthday">{translations.birthday}</Label>
+                  <Input
+                    id="user_birthday"
+                    type="date"
+                    max={new Date().toISOString().split("T")[0]}
+                    {...registerForm.register("user_birthday", {
+                      required: "Date of birth is required",
+                    })}
+                  />
+                  {registerForm.formState.errors.user_birthday && (
+                    <p className="text-sm text-red-500">
+                      {registerForm.formState.errors.user_birthday.message}
                     </p>
                   )}
                 </div>

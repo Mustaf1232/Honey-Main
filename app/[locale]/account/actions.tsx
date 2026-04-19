@@ -5,9 +5,10 @@ type UserData = {
   user_name: string;
   user_last_name: string;
   user_phone_number: string;
+  user_birthday: string;
   password: string;
   email: string;
-  first_order: boolean
+  first_order: boolean;
 };
 
 // retrieve user token
@@ -74,10 +75,11 @@ export async function create_user(user_data: UserData) {
     user_name: user_data.user_name,
     user_last_name: user_data.user_last_name,
     user_phone_number: user_data.user_phone_number,
+    user_birthday: user_data.user_birthday,
     password: user_data.password,
     user_role: "customer",
     email: user_data.email,
-    first_order : true 
+    first_order: true,
   };
   try {
     const req = await fetch(`${process.env.NEXT_PUBLIC_CMS_URL}/api/users`, {

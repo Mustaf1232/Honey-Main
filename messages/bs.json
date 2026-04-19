@@ -55,6 +55,7 @@
     "update_info": "Ažurirajte svoje lične podatke",
     "save_changes": "Sačuvaj promjene",
     "sign_out": "Odjava", 
-    "registering" : "Registracija..."
+    "registering": "Registracija...",
+    "birthday": "Datum rođenja"
   }
 }

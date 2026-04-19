@@ -55,6 +55,7 @@
     "update_info": "Update your personal information",
     "save_changes": "Save Changes",
     "sign_out": "Sign out",
-    "registering": "Registering..."
+    "registering": "Registering...",
+    "birthday": "Date of Birth"
   }
 }

@@ -32,7 +32,8 @@ const AuthPage = async ({
     update_info: t("update_info"),
     save_changes: t("save_changes"),
     sign_out: t("sign_out"),
-    registering : t("registering"),
+    registering: t("registering"),
+    birthday: t("birthday"),
   };
   if (user_token !== null) {
     return <AccountPage user_data={user_data} translations={translations}/>;
