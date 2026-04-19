@@ -1,0 +1,60 @@
+{
+  "Shared": {
+    "order-button": "Buy now"
+  },
+  "Checkout": {
+    "page_title": "Checkout",
+    "customer_info": "Customer Information",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "country": "Country",
+    "city": "City",
+    "address": "Address",
+    "phone": "Phone Number",
+    "email": "Email",
+    "place_order": "Place Order",
+    "order_summary": "Order Summary",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Total",
+    "customer_note": "Customer Note"
+  },
+  "Contact": {
+    "contact_us": "Contact Us",
+    "contact_paragraph": "We're glad you're on our site because it means you want success and progress. We will be happy to answer any questions you may have and provide you with all the information you need. The first step is to fill in the fields below and wait for our response, which will arrive within 24 hours.",
+    "name": "Name",
+    "name_placeholder": "Enter your full name",
+    "last_name": "Last Name",
+    "last_name_placeholder": "Enter your last name",
+    "email": "Email",
+    "email_placeholder": "Enter your email",
+    "message": "Message",
+    "message_placeholder": "Enter your message",
+    "send_message": "Send Message",
+    "phone": "Phone Number",
+    "phone_placeholder": "Enter your phone number"
+  },
+  "Faq": {
+    "search_faqs": "Search FAQs..."
+  },
+  "Account": {
+    "login": "Login",
+    "enter_credentials": "Enter your credentials to access your account",
+    "email": "Email",
+    "password": "Password",
+    "logging_in": "Logging in ...",
+    "register_question": "Don't have an account? Register",
+    "register": "Register",
+    "create_account": "Create new account",
+    "first_name": "First Name",
+    "last_name": "Last Name",
+    "phone_number": "Phone number",
+    "confirm_password": "Confirm Password",
+    "have_account": "Already have an account? Login",
+    "personal_information": "Personal Information",
+    "update_info": "Update your personal information",
+    "save_changes": "Save Changes",
+    "sign_out": "Sign out",
+    "registering": "Registering..."
+  }
+}

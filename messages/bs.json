@@ -1,0 +1,60 @@
+{
+  "Shared": {
+    "order-button": "Naruči"
+  },
+  "Checkout": {
+    "page_title": "Odjavljivanje",
+    "customer_info": "Informacije o klijentu",
+    "first_name": "Ime",
+    "last_name": "Prezime",
+    "country": "Država",
+    "city": "Grad",
+    "address": "Adresa",
+    "phone": "Broj telefona",
+    "email": "E-pošta",
+    "place_order": "Naručite",
+    "order_summary": "Sažetak narudžbe",
+    "subtotal": "Subtotal",
+    "shipping": "Shipping",
+    "total": "Ukupno",
+    "customer_note": "Kutija narudžbe"
+  },
+  "Contact": {
+    "contact_us": "Kontaktirajte nas",
+    "contact_paragraph": "Drago mi je što ste na našem sajtu jer to znači da želiš uspeh i napredak. Rado ćemo vam odgovoriti na sva pitanja koje imate i pružiti vam sve potrebne informacije. Prvi korak je da popuniš polja ispod i sačekaš naš odgovor koji stiže u roku od 24h.",
+    "name": "Ime",
+    "name_placeholder": "Unesite svoje puno ime",
+    "last_name": "Prezime",
+    "last_name_placeholder": "Unesite svoje prezime",
+    "email": "Email",
+    "email_placeholder": "Unesite svoju e-poštu",
+    "message": "Poruka",
+    "message_placeholder": "Unesite svoju poruku",
+    "send_message": "Pošalji poruku",
+    "phone": "Broj telefona",
+    "phone_placeholder": "Unesite svoj broj telefona"
+  },
+  "Faq": {
+    "search_faqs": "Pretražite FAQ..."
+  },
+  "Account": {
+    "login": "Prijava",
+    "enter_credentials": "Unesite svoje akreditive za pristup svom računu",
+    "email": "E-pošta",
+    "password": "Lozinka",
+    "logging_in": "Prijava...",
+    "register_question": "Nemate račun? Registrujte se",
+    "register": "Registar",
+    "create_account": "Kreiraj novi račun",
+    "first_name": "Ime",
+    "last_name": "Prezime",
+    "phone_number": "Broj telefona",
+    "confirm_password": "Potvrdi lozinku",
+    "have_account": "Već imate nalog? Prijavite se",
+    "personal_information": "Lične informacije",
+    "update_info": "Ažurirajte svoje lične podatke",
+    "save_changes": "Sačuvaj promjene",
+    "sign_out": "Odjava", 
+    "registering" : "Registracija..."
+  }
+}
