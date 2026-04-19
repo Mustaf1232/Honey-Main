@@ -9,7 +9,7 @@ const nextConfig = {
   webpack: (config, { isServer }) => {
     if (isServer) {
       const existing = Array.isArray(config.externals) ? config.externals : [];
-      config.externals = [...existing, "ioredis"];
+      config.externals = [...existing, { ioredis: "commonjs2 ioredis" }];
     }
     return config;
   },
