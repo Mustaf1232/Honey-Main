@@ -54,7 +54,7 @@ export default function AccountPage({
         title: "Saved",
         description: "Your information has been updated successfully.",
       })
-    } catch (error) {
+    } catch {
       toast({
         title: "Error",
         description: "Failed to save changes. Please try again.",
