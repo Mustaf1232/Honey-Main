@@ -5,6 +5,7 @@ import { Plus, Minus, ShoppingCart, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "@/i18n/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 export default function AddToCartWithCounter({
   initialCount = 1,
@@ -29,6 +30,7 @@ export default function AddToCartWithCounter({
 }) {
   const { add_to_cart, cart_data } = useCart();
   const router = useRouter();
+  const { toast } = useToast();
 
   const [count, setCount] = useState(initialCount);
 
@@ -38,17 +40,27 @@ export default function AddToCartWithCounter({
   const alreadyInCart = cart_data?.items?.some((item) => item.id === product_id) ?? false;
 
   const handleAddToCart = () => {
-    add_to_cart({
-      product_sale_price,
-      product_name,
-      product_picture_url,
-      product_id,
-      quantity: count,
-      price,
-      currency,
-      shipping,
-    });
-    setCount(1);
+    add_to_cart(
+      {
+        product_sale_price,
+        product_name,
+        product_picture_url,
+        product_id,
+        quantity: count,
+        price,
+        currency,
+        shipping,
+      },
+      {
+        onSuccess: () => {
+          toast({
+            title: "Added to cart",
+            description: `${product_name} (x${count}) has been added to your cart.`,
+          });
+          setCount(1);
+        },
+      },
+    );
   };
 
   const handleBuyNow = () => {
