@@ -1,5 +1,5 @@
 "use client";
-import { Link } from "@/i18n/routing";
+import { Link } from "@/i18n/navigation";
 import Cart from "./cart";
 import type { Menu, MenuItem } from "@/types";
 import { useWindowSize } from "@/hooks/use-window-size";
