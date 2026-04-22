@@ -154,8 +154,11 @@ const RelatedProductCards = ({
               <CardContent className="p-4 ">
                 <Image
                   src={
-                    (process.env.NEXT_PUBLIC_CMS_URL as string) +
-                    product.product_image.url
+                    product.product_type === "heart"
+                      ? "/Heart.png"
+                      : product.product_type === "stomach"
+                      ? "/Belly.png"
+                      : (process.env.NEXT_PUBLIC_CMS_URL as string) + product.product_image.url
                   }
                   alt={product.product_name}
                   width={400}
