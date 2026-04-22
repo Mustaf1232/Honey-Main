@@ -23,7 +23,7 @@ console.log(page_data, buy_button);
         width={1920}
         height={1080}
         alt="Banner"
-        className="w-full h-auto -my-[3%]"
+        className="w-full h-auto -my-[10%]"
         priority
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
