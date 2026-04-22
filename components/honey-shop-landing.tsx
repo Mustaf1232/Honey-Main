@@ -17,7 +17,7 @@ export function HoneyShopLandingComponent({
 }) {
 console.log(page_data, buy_button);
   return (
-    <div className="relative w-full">
+    <div className="relative w-full max-h-[75vh] overflow-hidden">
       <Image
         src="/Baner1.jpeg"
         width={1920}
@@ -32,11 +32,11 @@ console.log(page_data, buy_button);
           initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center [&_h1]:text-3xl [&_h1]:md:text-5xl [&_h2]:text-xl [&_h2]:md:text-3xl [&_p]:text-sm [&_p]:md:text-base"
+          className="text-center [&_h1]:text-3xl [&_h1]:md:text-5xl [&_h2]:text-xl [&_h2]:md:text-3xl [&_p]:text-sm [&_p]:md:text-base bg-black/40 backdrop-blur-sm rounded-2xl px-6 py-4"
         >
           <RichText
             content={page_data?.hero_title}
-            className="text-white text-center drop-shadow-md"
+            className="text-white text-center [&_*]:drop-shadow-lg"
           />
         </motion.div>
         <motion.div
@@ -45,7 +45,7 @@ console.log(page_data, buy_button);
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Link href="/product/4">
-            <Button className="rounded-full text-sm px-6 py-4 min-w-[130px] uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-md">
+            <Button className="rounded-full text-sm px-6 py-4 min-w-[130px] uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-lg">
               {buy_button}
             </Button>
           </Link>
