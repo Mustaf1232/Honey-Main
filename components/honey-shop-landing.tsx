@@ -17,13 +17,13 @@ export function HoneyShopLandingComponent({
 }) {
 console.log(page_data, buy_button);
   return (
-    <div className="relative w-full">
+    <div className="relative w-full overflow-hidden">
       <Image
         src="/Baner1.jpeg"
         width={1920}
         height={1080}
         alt="Banner"
-        className="w-full h-auto"
+        className="w-full h-auto -my-[6%]"
         priority
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
