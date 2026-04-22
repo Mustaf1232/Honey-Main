@@ -632,7 +632,7 @@ const { width } = useWindowSize();
             </Link>
           </motion.div>
           <Image
-            src="/honey.png"
+            src="/Baner1.jpeg"
             width={600}
             height={600}
             alt="Honey"
