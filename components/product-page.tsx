@@ -75,7 +75,13 @@ export default function ProductPageComponent({
         <div className="md:flex md:items-center md:justify-between">
           <div className="md:w-1/2">
             <Image
-              src={process.env.NEXT_PUBLIC_CMS_URL + product.product_image.url}
+              src={
+                product.product_type === "heart"
+                  ? "/Heart.png"
+                  : product.product_type === "stomach"
+                  ? "/Belly.png"
+                  : process.env.NEXT_PUBLIC_CMS_URL + product.product_image.url
+              }
               alt="Product Image"
               width={400}
               height={400}
