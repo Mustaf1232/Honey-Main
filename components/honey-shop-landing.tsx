@@ -22,22 +22,23 @@ const { width } = useWindowSize();
   return (
     <div className="relative w-full h-[90vh] md:h-[88vh] overflow-hidden">
       <Image
-        src="/Baner1bg.png"
+        src="/Baner1.jpeg"
         fill
         alt="Banner"
         className="object-cover object-center"
         priority
       />
-      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 flex flex-col items-center justify-end z-10 px-4 pb-16 md:pb-24">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-8"
+          className="text-center mb-6"
         >
           <RichText
             content={page_data?.hero_title}
-            className="text-background text-center pb-8"
+            className="text-white text-center drop-shadow-lg"
           />
         </motion.div>
         <motion.div
@@ -46,7 +47,7 @@ const { width } = useWindowSize();
           transition={{ duration: 0.5, delay: 0.3 }}
         >
           <Link href="/product/4" className="z-40 relative">
-            <Button className="rounded-full text-md px-8 py-6 min-w-[150px] z-30 uppercase font-semibold text-background background-noise hover:bg-red-900 transition-all duration-500 hover:text-background">
+            <Button className="rounded-full text-md px-8 py-6 min-w-[150px] z-30 uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-lg">
               {buy_button}
             </Button>
           </Link>
