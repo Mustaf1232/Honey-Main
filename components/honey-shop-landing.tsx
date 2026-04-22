@@ -26,29 +26,41 @@ console.log(page_data, buy_button);
         className="w-full h-auto"
         priority
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/20 to-transparent" />
-      <div className="absolute inset-0 flex flex-col justify-center z-10 px-8 md:px-16 max-w-lg">
+      <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
+      <div className="absolute inset-0 flex flex-col justify-center z-10 px-8 md:px-20 max-w-2xl">
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-          className="[&_h1]:text-2xl [&_h1]:md:text-4xl [&_h1]:font-bold [&_h2]:text-lg [&_h2]:md:text-2xl [&_p]:text-xs [&_p]:md:text-sm [&_p]:mt-2 mb-6"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-2"
+        >
+          <span className="inline-block text-xs md:text-sm uppercase tracking-[0.3em] text-red-300 font-semibold mb-3">
+            100% Prirodan
+          </span>
+        </motion.div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="[&_h1]:text-4xl [&_h1]:md:text-6xl [&_h1]:font-extrabold [&_h1]:leading-tight [&_h2]:text-xl [&_h2]:md:text-3xl [&_h2]:font-semibold [&_h2]:mt-2 [&_p]:text-sm [&_p]:md:text-base [&_p]:mt-3 [&_p]:text-white/80 mb-8"
         >
           <RichText
             content={page_data?.hero_title}
-            className="text-white [&_*]:drop-shadow-md"
+            className="text-white [&_strong]:text-red-300 [&_*]:drop-shadow-lg"
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5, delay: 0.3 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.25 }}
+          className="flex items-center gap-4"
         >
           <Link href="/product/4">
-            <Button className="rounded-full text-sm px-7 py-4 uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-lg">
+            <Button className="rounded-full text-base px-8 py-5 uppercase font-bold bg-red-800 text-white hover:bg-white hover:text-red-900 transition-all duration-500 shadow-xl tracking-wide border-2 border-red-700 hover:border-red-900">
               {buy_button}
             </Button>
           </Link>
+          <span className="text-white/60 text-xs hidden md:block">Vidljivi rezultati za 7 dana</span>
         </motion.div>
       </div>
     </div>
