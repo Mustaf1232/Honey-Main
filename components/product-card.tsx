@@ -10,8 +10,8 @@ const ProductCard = ({
 }) => {
   const product_image_src = {
     default: "/product_default.png",
-    heart: "/product_heart.png",
-    stomach: "/product_stomach.png",
+    heart: "/Heart.png",
+    stomach: "/Belly.png",
   };
   return (
     <Link href={`/product/${product_id}`} className="rounded-md flex flex-col ">
