@@ -5,7 +5,6 @@ import { Button } from "./ui/button";
 import Link from "next/link";
 import RichText from "./rich-text";
 import type { HomePageData } from "@/types";
-import { useWindowSize } from "@/hooks/use-window-size";
 
 import { motion } from "framer-motion";
 
@@ -16,9 +15,7 @@ export function HoneyShopLandingComponent({
   page_data: HomePageData;
   buy_button: string;
 }) {
-const { width } = useWindowSize();
-  const is_sm = width! < 768;
-  console.log(page_data, buy_button);
+console.log(page_data, buy_button);
   return (
     <div className="relative w-full h-[90vh] md:h-[88vh] overflow-hidden">
       <Image
