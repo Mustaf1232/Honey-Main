@@ -17,7 +17,7 @@ export function HoneyShopLandingComponent({
 }) {
 console.log(page_data, buy_button);
   return (
-    <div className="relative w-full h-[90vh] md:h-[88vh] overflow-hidden">
+    <div className="relative w-full h-[55vh] md:h-[65vh] overflow-hidden">
       <Image
         src="/Baner1.jpeg"
         fill
@@ -25,26 +25,26 @@ console.log(page_data, buy_button);
         className="object-cover object-center"
         priority
       />
-      <div className="absolute inset-0 bg-black/30" />
-      <div className="absolute inset-0 flex flex-col items-center justify-end z-10 px-4 pb-16 md:pb-24">
+      <div className="absolute inset-0 bg-black/20" />
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10 px-6 gap-5">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: -16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-6"
+          className="text-center [&_h1]:text-3xl [&_h1]:md:text-5xl [&_h2]:text-xl [&_h2]:md:text-3xl [&_p]:text-sm [&_p]:md:text-base"
         >
           <RichText
             content={page_data?.hero_title}
-            className="text-white text-center drop-shadow-lg"
+            className="text-white text-center drop-shadow-md"
           />
         </motion.div>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.3 }}
         >
-          <Link href="/product/4" className="z-40 relative">
-            <Button className="rounded-full text-md px-8 py-6 min-w-[150px] z-30 uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-lg">
+          <Link href="/product/4">
+            <Button className="rounded-full text-sm px-6 py-4 min-w-[130px] uppercase font-semibold bg-white text-red-900 hover:bg-red-900 hover:text-white transition-all duration-500 shadow-md">
               {buy_button}
             </Button>
           </Link>
