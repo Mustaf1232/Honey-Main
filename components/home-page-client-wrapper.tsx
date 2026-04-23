@@ -43,13 +43,13 @@ const HomePageClientWrapper = ({
   return (
     <main className="min-h-screen w-full h-full mx-auto">
       <HoneyShopLandingComponent page_data={page_data} buy_button={order_button} />
-      <InfoSection page_data={page_data} />
-      <ScienceSection title={science_section_title} studies={science_array} />
       <PresentationSection
         presentation_paragraph={presentation_paragraph}
         presentation_products={presentation_products}
         product_data={product_data}
       />
+      <InfoSection page_data={page_data} />
+      <ScienceSection title={science_section_title} studies={science_array} />
       <div className="pt-32" />
       <RecipeSection recipe_paragraph={recipe_section_paragraph} />
       <div className="pt-32" />
