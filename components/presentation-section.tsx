@@ -24,7 +24,7 @@ const PresentationSection = ({
   return (
     <div
       ref={ref}
-      className="w-full h-full p-8 bg-gradient-to-t from-background to-red-800 via-red-800 flex flex-col items-center mt-14"
+      className="w-full h-full p-8 bg-gradient-to-b from-red-900 via-red-800 to-background flex flex-col items-center"
     >
       <motion.div
         initial={{ opacity: 0, y: 0 }}
