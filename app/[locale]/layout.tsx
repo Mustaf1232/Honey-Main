@@ -48,15 +48,16 @@ const geistMono = localFont({
 //   };
 // }
 async function get_menu(locale: string) {
-  const response = await fetch(
-    process.env.NEXT_PUBLIC_CMS_URL + `/api/globals/menu?locale=${locale}`,
-    { cache: "no-cache" }
-  );
-  if (!response.ok) {
-    throw new Error("Failed to fetch menu" + response.statusText);
+  try {
+    const response = await fetch(
+      process.env.NEXT_PUBLIC_CMS_URL + `/api/globals/menu?locale=${locale}`,
+      { cache: "no-cache" }
+    );
+    if (!response.ok) return null;
+    return await response.json();
+  } catch {
+    return null;
   }
-  const menu_data = await response.json();
-  return menu_data;
 }
 
 export const metadata: Metadata = {
