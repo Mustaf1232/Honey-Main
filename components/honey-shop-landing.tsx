@@ -28,6 +28,15 @@ console.log(page_data, buy_button);
       />
       <div className="absolute inset-0 bg-gradient-to-r from-black/70 via-black/30 to-transparent" />
 
+      {/* Wave transition into product section */}
+      <div className="absolute bottom-0 left-0 w-full overflow-hidden leading-none z-20">
+        <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[80px] md:h-[120px]">
+          <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1380,40 1440,60 L1440,120 L0,120 Z" fill="#7f1d1d" opacity="0.6"/>
+          <path d="M0,70 C200,20 400,100 600,50 C800,0 1000,90 1200,50 C1350,20 1420,80 1440,70 L1440,120 L0,120 Z" fill="#991b1b" opacity="0.7"/>
+          <path d="M0,90 C240,50 480,110 720,80 C960,50 1200,100 1440,85 L1440,120 L0,120 Z" fill="#7f1d1d"/>
+        </svg>
+      </div>
+
       <div className="absolute inset-0 flex flex-col justify-center z-10 px-10 md:px-24">
         {/* eyebrow */}
         <motion.div
