@@ -45,7 +45,7 @@ const HomePageClientWrapper = ({
       <HoneyShopLandingComponent page_data={page_data} buy_button={order_button} />
 
       {/* Wave separator */}
-      <div className="w-full overflow-hidden leading-none -mt-1 bg-background">
+      <div className="w-full overflow-hidden leading-none -mt-[50px] md:-mt-1 bg-background">
         <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[60px] md:h-[100px] block">
           <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1380,40 1440,60 L1440,0 L0,0 Z" fill="transparent"/>
           <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1380,40 1440,60 L1440,120 L0,120 Z" fill="#7f1d1d" opacity="0.6"/>
