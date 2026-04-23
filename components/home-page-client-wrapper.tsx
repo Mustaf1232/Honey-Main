@@ -43,6 +43,17 @@ const HomePageClientWrapper = ({
   return (
     <main className="min-h-screen w-full h-full mx-auto">
       <HoneyShopLandingComponent page_data={page_data} buy_button={order_button} />
+
+      {/* Wave separator */}
+      <div className="w-full overflow-hidden leading-none -mt-1 bg-background">
+        <svg viewBox="0 0 1440 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="w-full h-[60px] md:h-[100px] block">
+          <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1380,40 1440,60 L1440,0 L0,0 Z" fill="transparent"/>
+          <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1380,40 1440,60 L1440,120 L0,120 Z" fill="#7f1d1d" opacity="0.6"/>
+          <path d="M0,70 C200,20 400,100 600,50 C800,0 1000,90 1200,50 C1350,20 1420,80 1440,70 L1440,120 L0,120 Z" fill="#991b1b" opacity="0.8"/>
+          <path d="M0,90 C240,50 480,110 720,80 C960,50 1200,100 1440,85 L1440,120 L0,120 Z" fill="#7f1d1d"/>
+        </svg>
+      </div>
+
       <PresentationSection
         presentation_paragraph={presentation_paragraph}
         presentation_products={presentation_products}
