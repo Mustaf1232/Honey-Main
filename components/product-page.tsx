@@ -128,6 +128,7 @@ export default function ProductPageComponent({
       <RelatedProductCards
         products={all_products}
         current_product={product.id}
+        buy_button={buy_button}
       />
     </div>
   );
@@ -136,9 +137,11 @@ export default function ProductPageComponent({
 const RelatedProductCards = ({
   products,
   current_product,
+  buy_button,
 }: {
   products: AllProducts;
   current_product: number;
+  buy_button: string;
 }) => {
   const { country } = useSetCountry();
 
@@ -148,49 +151,55 @@ const RelatedProductCards = ({
         const pricing = get_country_price(product, country as string);
 
         if (product.id === current_product) return null;
+        const image_src =
+          product.product_type === "heart"
+            ? "/Heart.png"
+            : product.product_type === "stomach"
+            ? "/Belly.png"
+            : (process.env.NEXT_PUBLIC_CMS_URL as string) + product.product_image.url;
+
         return (
-          <Link key={product.id} href={`/product/${product.id}`}>
-            <Card key={product.id} className="shadow-none border-red-800/10">
-              <CardContent className="p-4 ">
+          <Card key={product.id} className="shadow-none border-red-800/10">
+            <CardContent className="p-4">
+              <Link href={`/product/${product.id}`}>
                 <Image
-                  src={
-                    product.product_type === "heart"
-                      ? "/Heart.png"
-                      : product.product_type === "stomach"
-                      ? "/Belly.png"
-                      : (process.env.NEXT_PUBLIC_CMS_URL as string) + product.product_image.url
-                  }
+                  src={image_src}
                   alt={product.product_name}
                   width={400}
                   height={400}
                   className="w-full h-auto object-cover mb-4"
                 />
-                <h3 className="text-xl font-bold mb-2">
-                  {product.product_name}
-                </h3>
+                <h3 className="text-xl font-bold mb-2">{product.product_name}</h3>
                 <RichText
                   className="line-clamp-3"
                   content={product.product_description}
                 />
-                {pricing.product_sale_price === null && (
-                  <div className="text-lg font-bold mb-4 mt-2">
+              </Link>
+              {pricing.product_sale_price === null && (
+                <div className="text-lg font-bold mb-4 mt-2">
+                  {pricing.product_standart_price} {pricing.currency}
+                </div>
+              )}
+              {pricing.product_sale_price !== null && (
+                <div className="flex items-center space-x-4 text-lg font-bold mb-4 mt-2">
+                  <p className="text-red-300 line-through text-md">
                     {pricing.product_standart_price} {pricing.currency}
-                  </div>
-                )}
-                {pricing.product_sale_price !== null && (
-                  <div className="flex items-center space-x-4 text-lg font-bold mb-4 mt-2">
-                    <p className="text-red-300 line-through text-md">
-                      {" "}
-                      {pricing.product_standart_price} {pricing.currency}
-                    </p>
-                    <p>
-                      {pricing.product_sale_price} {pricing.currency}
-                    </p>
-                  </div>
-                )}
-              </CardContent>
-            </Card>
-          </Link>
+                  </p>
+                  <p>{pricing.product_sale_price} {pricing.currency}</p>
+                </div>
+              )}
+              <AddToCartWithCounter
+                buy_button_text={buy_button}
+                product_id={product.id.toString()}
+                product_sale_price={pricing.product_sale_price?.toString() ?? ""}
+                product_name={product.product_name}
+                product_picture_url={image_src}
+                price={pricing.product_standart_price?.toString() ?? ""}
+                currency={pricing.currency as string}
+                shipping={pricing.product_shipping?.toString() ?? "0"}
+              />
+            </CardContent>
+          </Card>
         );
       })}
     </div>
