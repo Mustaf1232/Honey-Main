@@ -63,31 +63,31 @@ export default function CountrySelector() {
       className={`h-screen flex flex-col items-center justify-between bg-background/95 backdrop-blur-md absolute top-0 left-0 w-screen z-50 overflow-hidden`}
     >
       {/* Desktop product images */}
-      <motion.div className="absolute top-[22%] left-[6%] hidden md:block pointer-events-none"
+      <motion.div className="absolute top-[20%] left-[14%] hidden md:block pointer-events-none"
         animate={{ y: [0, -14, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Heart.png" alt="" width={260} height={260} className="-rotate-[18deg] opacity-90 drop-shadow-2xl" />
+        <Image src="/Heart.png" alt="" width={310} height={310} className="-rotate-[18deg] opacity-90 drop-shadow-2xl" />
       </motion.div>
-      <motion.div className="absolute bottom-[18%] right-[5%] hidden md:block pointer-events-none"
+      <motion.div className="absolute bottom-[14%] right-[13%] hidden md:block pointer-events-none"
         animate={{ y: [0, 14, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Belly.png" alt="" width={240} height={240} className="rotate-[14deg] opacity-90 drop-shadow-2xl" />
+        <Image src="/Belly.png" alt="" width={290} height={290} className="rotate-[14deg] opacity-90 drop-shadow-2xl" />
       </motion.div>
-      <motion.div className="absolute top-[15%] right-[8%] hidden md:block pointer-events-none"
+      <motion.div className="absolute top-[12%] right-[15%] hidden md:block pointer-events-none"
         animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/product_default.png" alt="" width={200} height={200} className="-rotate-[6deg] opacity-80 drop-shadow-xl" />
+        <Image src="/product_default.png" alt="" width={240} height={240} className="-rotate-[6deg] opacity-80 drop-shadow-xl" />
       </motion.div>
 
       {/* Mobile product images */}
-      <motion.div className="absolute top-[18%] left-[2%] md:hidden pointer-events-none"
+      <motion.div className="absolute top-[18%] left-[5%] md:hidden pointer-events-none"
         animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Heart.png" alt="" width={130} height={130} className="-rotate-[14deg] opacity-75 drop-shadow-xl" />
+        <Image src="/Heart.png" alt="" width={155} height={155} className="-rotate-[14deg] opacity-75 drop-shadow-xl" />
       </motion.div>
-      <motion.div className="absolute bottom-[15%] right-[2%] md:hidden pointer-events-none"
+      <motion.div className="absolute bottom-[12%] right-[5%] md:hidden pointer-events-none"
         animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Belly.png" alt="" width={120} height={120} className="rotate-[12deg] opacity-75 drop-shadow-xl" />
+        <Image src="/Belly.png" alt="" width={145} height={145} className="rotate-[12deg] opacity-75 drop-shadow-xl" />
       </motion.div>
-      <motion.div className="absolute top-[12%] right-[3%] md:hidden pointer-events-none"
+      <motion.div className="absolute top-[10%] right-[6%] md:hidden pointer-events-none"
         animate={{ y: [0, -8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/product_default.png" alt="" width={100} height={100} className="-rotate-[8deg] opacity-65 drop-shadow-lg" />
+        <Image src="/product_default.png" alt="" width={120} height={120} className="-rotate-[8deg] opacity-65 drop-shadow-lg" />
       </motion.div>
 
       <Image src="/Bleta-02.png" alt="background" width={100} height={100} />
