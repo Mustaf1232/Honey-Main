@@ -77,17 +77,13 @@ export default function CountrySelector() {
       </motion.div>
 
       {/* Mobile product images */}
-      <motion.div className="absolute top-[18%] left-[5%] md:hidden pointer-events-none"
+      <motion.div className="absolute top-[38%] -left-[8%] md:hidden pointer-events-none"
         animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Heart.png" alt="" width={155} height={155} className="-rotate-[14deg] opacity-75 drop-shadow-xl" />
+        <Image src="/Heart.png" alt="" width={160} height={160} className="-rotate-[20deg] opacity-80 drop-shadow-xl" />
       </motion.div>
-      <motion.div className="absolute bottom-[12%] right-[5%] md:hidden pointer-events-none"
+      <motion.div className="absolute top-[48%] -right-[8%] md:hidden pointer-events-none"
         animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Belly.png" alt="" width={145} height={145} className="rotate-[12deg] opacity-75 drop-shadow-xl" />
-      </motion.div>
-      <motion.div className="absolute top-[10%] right-[6%] md:hidden pointer-events-none"
-        animate={{ y: [0, -8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/product_default.png" alt="" width={120} height={120} className="-rotate-[8deg] opacity-65 drop-shadow-lg" />
+        <Image src="/Belly.png" alt="" width={150} height={150} className="rotate-[20deg] opacity-80 drop-shadow-xl" />
       </motion.div>
 
       <Image src="/Bleta-02.png" alt="background" width={100} height={100} />
