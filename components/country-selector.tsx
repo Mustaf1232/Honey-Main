@@ -3,10 +3,11 @@
 import { useSetCountry } from "@/context/CountryContext";
 import React, { useState, useEffect, useRef } from "react";
 import { ChevronDown, Check } from "lucide-react";
-// import { useRouter } from "next/navigation";
 import { useCart } from "@/context/CartContext";
 import LoadingSpinner from "./loading-spinner";
 import Image from "next/image";
+import { motion } from "framer-motion";
+
 
 export type CountryListItem = {
   country: string;
@@ -61,18 +62,33 @@ export default function CountrySelector() {
     <div
       className={`h-screen flex flex-col items-center justify-between bg-background/95 backdrop-blur-md absolute top-0 left-0 w-screen z-50 overflow-hidden`}
     >
-      {/* Scattered product images */}
-      <Image src="/Heart.png" alt="" width={220} height={220}
-        className="absolute top-[8%] left-[-3%] rotate-[-15deg] opacity-80 drop-shadow-xl pointer-events-none hidden md:block" />
-      <Image src="/Belly.png" alt="" width={200} height={200}
-        className="absolute bottom-[12%] right-[-2%] rotate-[12deg] opacity-80 drop-shadow-xl pointer-events-none hidden md:block" />
-      <Image src="/product_default.png" alt="" width={160} height={160}
-        className="absolute top-[45%] right-[4%] rotate-[-8deg] opacity-70 drop-shadow-lg pointer-events-none hidden md:block" />
-      {/* mobile - smaller, corners only */}
-      <Image src="/Heart.png" alt="" width={110} height={110}
-        className="absolute top-[5%] left-[-5%] rotate-[-12deg] opacity-60 drop-shadow-lg pointer-events-none md:hidden" />
-      <Image src="/Belly.png" alt="" width={100} height={100}
-        className="absolute bottom-[10%] right-[-4%] rotate-[10deg] opacity-60 drop-shadow-lg pointer-events-none md:hidden" />
+      {/* Desktop product images */}
+      <motion.div className="absolute top-[22%] left-[6%] hidden md:block pointer-events-none"
+        animate={{ y: [0, -14, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Heart.png" alt="" width={260} height={260} className="-rotate-[18deg] opacity-90 drop-shadow-2xl" />
+      </motion.div>
+      <motion.div className="absolute bottom-[18%] right-[5%] hidden md:block pointer-events-none"
+        animate={{ y: [0, 14, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Belly.png" alt="" width={240} height={240} className="rotate-[14deg] opacity-90 drop-shadow-2xl" />
+      </motion.div>
+      <motion.div className="absolute top-[15%] right-[8%] hidden md:block pointer-events-none"
+        animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/product_default.png" alt="" width={200} height={200} className="-rotate-[6deg] opacity-80 drop-shadow-xl" />
+      </motion.div>
+
+      {/* Mobile product images */}
+      <motion.div className="absolute top-[18%] left-[2%] md:hidden pointer-events-none"
+        animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Heart.png" alt="" width={130} height={130} className="-rotate-[14deg] opacity-75 drop-shadow-xl" />
+      </motion.div>
+      <motion.div className="absolute bottom-[15%] right-[2%] md:hidden pointer-events-none"
+        animate={{ y: [0, 10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Belly.png" alt="" width={120} height={120} className="rotate-[12deg] opacity-75 drop-shadow-xl" />
+      </motion.div>
+      <motion.div className="absolute top-[12%] right-[3%] md:hidden pointer-events-none"
+        animate={{ y: [0, -8, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/product_default.png" alt="" width={100} height={100} className="-rotate-[8deg] opacity-65 drop-shadow-lg" />
+      </motion.div>
 
       <Image src="/Bleta-02.png" alt="background" width={100} height={100} />
       <div className="w-full max-w-md px-4" ref={dropdownRef}>
