@@ -76,18 +76,18 @@ export default function CountrySelector() {
         <Image src="/product_default.png" alt="" width={240} height={240} className="-rotate-[6deg] opacity-80 drop-shadow-xl" />
       </motion.div>
 
-      {/* Mobile product images - row below selector */}
-      <motion.div className="absolute bottom-[4%] left-[2%] md:hidden pointer-events-none"
-        animate={{ y: [0, -10, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Heart.png" alt="" width={140} height={140} className="-rotate-[12deg] opacity-85 drop-shadow-xl" />
+      {/* Mobile product images */}
+      <motion.div className="absolute bottom-[22%] left-[0%] md:hidden pointer-events-none"
+        animate={{ y: [0, -12, 0] }} transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Heart.png" alt="" width={180} height={180} className="-rotate-[14deg] opacity-90 drop-shadow-xl" />
       </motion.div>
-      <motion.div className="absolute bottom-[2%] left-1/2 -translate-x-1/2 md:hidden pointer-events-none"
-        animate={{ y: [0, -12, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/product_default.png" alt="" width={150} height={150} className="rotate-[4deg] opacity-85 drop-shadow-xl" />
+      <motion.div className="absolute bottom-[18%] left-1/2 -translate-x-1/2 md:hidden pointer-events-none"
+        animate={{ y: [0, -14, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/product_default.png" alt="" width={190} height={190} className="rotate-[5deg] opacity-90 drop-shadow-xl" />
       </motion.div>
-      <motion.div className="absolute bottom-[4%] right-[2%] md:hidden pointer-events-none"
-        animate={{ y: [0, -8, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
-        <Image src="/Belly.png" alt="" width={140} height={140} className="rotate-[12deg] opacity-85 drop-shadow-xl" />
+      <motion.div className="absolute bottom-[22%] right-[0%] md:hidden pointer-events-none"
+        animate={{ y: [0, -10, 0] }} transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}>
+        <Image src="/Belly.png" alt="" width={180} height={180} className="rotate-[14deg] opacity-90 drop-shadow-xl" />
       </motion.div>
 
       <Image src="/Bleta-02.png" alt="background" width={100} height={100} />
