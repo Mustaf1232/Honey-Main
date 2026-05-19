@@ -12,6 +12,15 @@ const apply10PctDiscount = (price: number | null | undefined): string | null => 
   return (Math.round(price * 0.9 * 100) / 100).toString();
 };
 
+const get_product_image = (product: Product): string => {
+  if (product.product_type === "heart") return "/Heart.png";
+  if (product.product_type === "stomach") return "/Belly.png";
+  if (product.product_type === "default") return "/product_default.png";
+  // For any other type, prefer the CMS image if available, else fallback to default
+  const cms_url = product.product_image?.url;
+  return cms_url ? (process.env.NEXT_PUBLIC_CMS_URL ?? "") + cms_url : "/product_default.png";
+};
+
 const get_country_price = (product: Product, country: string) => {
   let product_standart_price;
   let product_sale_price;
@@ -80,13 +89,7 @@ export default function ProductPageComponent({
         <div className="md:flex md:items-center md:justify-between">
           <div className="md:w-1/2">
             <Image
-              src={
-                product.product_type === "heart"
-                  ? "/Heart.png"
-                  : product.product_type === "stomach"
-                  ? "/Belly.png"
-                  : process.env.NEXT_PUBLIC_CMS_URL + product.product_image.url
-              }
+              src={get_product_image(product)}
               alt="Product Image"
               width={400}
               height={400}
@@ -109,9 +112,7 @@ export default function ProductPageComponent({
               product_id={product.id.toString()}
               product_sale_price={apply10PctDiscount(pricing.product_standart_price as number) ?? ""}
               product_name={product.product_name}
-              product_picture_url={
-                process.env.NEXT_PUBLIC_CMS_URL + product.product_image.url
-              }
+              product_picture_url={get_product_image(product)}
               price={pricing.product_standart_price?.toString() ?? ""}
               currency={pricing.currency as string}
               shipping={pricing.product_shipping?.toString() ?? "0"}
@@ -149,12 +150,7 @@ const RelatedProductCards = ({
         const pricing = get_country_price(product, country as string);
 
         if (product.id === current_product) return null;
-        const image_src =
-          product.product_type === "heart"
-            ? "/Heart.png"
-            : product.product_type === "stomach"
-            ? "/Belly.png"
-            : (process.env.NEXT_PUBLIC_CMS_URL as string) + product.product_image.url;
+        const image_src = get_product_image(product);
 
         return (
           <Card key={product.id} className="shadow-none border-red-800/10">

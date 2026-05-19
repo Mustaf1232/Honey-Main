@@ -20,7 +20,7 @@ const ProductCard = ({
   image_url?: string;
   product_name?: string;
 }) => {
-  const image_src = static_images[product_type] ?? image_url ?? "/product_default.png";
+  const image_src = static_images[product_type] ?? "/product_default.png";
 
   const label =
     product_type === "default" ? "Standard"
