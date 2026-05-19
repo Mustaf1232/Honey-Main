@@ -7,6 +7,11 @@ import RichText from "./rich-text";
 import AddToCartWithCounter from "./add-to-cart-button";
 import { useSetCountry } from "@/context/CountryContext";
 
+const apply10PctDiscount = (price: number | null | undefined): string | null => {
+  if (price == null) return null;
+  return (Math.round(price * 0.9 * 100) / 100).toString();
+};
+
 const get_country_price = (product: Product, country: string) => {
   let product_standart_price;
   let product_sale_price;
@@ -90,26 +95,19 @@ export default function ProductPageComponent({
           </div>
           <CardContent className="md:w-1/2 p-6 py-24">
             <h1 className="text-3xl font-bold mb-4">{product.product_name}</h1>
-            {pricing.product_sale_price === null && (
-              <div className="text-2xl font-bold mb-6">
+            <div className="flex items-center gap-3 text-2xl font-bold mb-2">
+              <p className="text-red-300 line-through text-xl">
                 {pricing.product_standart_price} {pricing.currency}
-              </div>
-            )}
-            {pricing.product_sale_price !== null && (
-              <div className="flex items-center space-x-4 text-2xl font-bold mb-6">
-                <p className="text-red-300 line-through text-xl">
-                  {" "}
-                  {pricing.product_standart_price} {pricing.currency}
-                </p>
-                <p>
-                  {pricing.product_sale_price} {pricing.currency}
-                </p>
-              </div>
-            )}
+              </p>
+              <p>
+                {apply10PctDiscount(pricing.product_standart_price as number)} {pricing.currency}
+              </p>
+              <span className="text-sm font-semibold bg-yellow-400 text-red-900 px-2 py-1 rounded-full">-10%</span>
+            </div>
             <AddToCartWithCounter
               buy_button_text={buy_button}
               product_id={product.id.toString()}
-              product_sale_price={pricing.product_sale_price?.toString() ?? ""}
+              product_sale_price={apply10PctDiscount(pricing.product_standart_price as number) ?? ""}
               product_name={product.product_name}
               product_picture_url={
                 process.env.NEXT_PUBLIC_CMS_URL + product.product_image.url
@@ -175,23 +173,17 @@ const RelatedProductCards = ({
                   content={product.product_description}
                 />
               </Link>
-              {pricing.product_sale_price === null && (
-                <div className="text-lg font-bold mb-4 mt-2">
+              <div className="flex items-center gap-2 text-lg font-bold mb-4 mt-2">
+                <p className="text-red-300 line-through text-base">
                   {pricing.product_standart_price} {pricing.currency}
-                </div>
-              )}
-              {pricing.product_sale_price !== null && (
-                <div className="flex items-center space-x-4 text-lg font-bold mb-4 mt-2">
-                  <p className="text-red-300 line-through text-md">
-                    {pricing.product_standart_price} {pricing.currency}
-                  </p>
-                  <p>{pricing.product_sale_price} {pricing.currency}</p>
-                </div>
-              )}
+                </p>
+                <p>{apply10PctDiscount(pricing.product_standart_price as number)} {pricing.currency}</p>
+                <span className="text-xs font-semibold bg-yellow-400 text-red-900 px-2 py-0.5 rounded-full">-10%</span>
+              </div>
               <AddToCartWithCounter
                 buy_button_text={buy_button}
                 product_id={product.id.toString()}
-                product_sale_price={pricing.product_sale_price?.toString() ?? ""}
+                product_sale_price={apply10PctDiscount(pricing.product_standart_price as number) ?? ""}
                 product_name={product.product_name}
                 product_picture_url={image_src}
                 price={pricing.product_standart_price?.toString() ?? ""}

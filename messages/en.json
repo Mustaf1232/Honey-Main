@@ -38,7 +38,10 @@
     "our-ingredients": "Our Ingredients",
     "ingredients-title": "Discover what makes our honey special",
     "ingredients-description": "Every ingredient is carefully selected from nature — pure, natural and without compromise. Find out more about what goes into every jar.",
-    "learn-more": "Learn More"
+    "learn-more": "Learn More",
+    "sale-button": "10% Off",
+    "sale-toast-title": "Special Offer!",
+    "sale-toast-message": "All our products are now 10% off. Don't miss this deal!"
   },
   "Faq": {
     "search_faqs": "Search FAQs..."

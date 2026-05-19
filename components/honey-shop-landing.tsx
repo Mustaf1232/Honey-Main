@@ -6,6 +6,8 @@ import RichText from "./rich-text";
 import type { HomePageData } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
+import { useToast } from "@/hooks/use-toast";
+import { Tag } from "lucide-react";
 
 export function HoneyShopLandingComponent({
   page_data,
@@ -16,7 +18,7 @@ export function HoneyShopLandingComponent({
 }) {
   const t = useTranslations("Landing");
   const locale = useLocale();
-console.log(page_data, buy_button);
+  const { toast } = useToast();
   return (
     <div className="relative w-full overflow-hidden">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -63,17 +65,30 @@ console.log(page_data, buy_button);
               className="h-px w-24 bg-white/30 mb-8"
             />
 
-            {/* buy button */}
+            {/* buy button + sale button */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
+              className="flex items-center gap-3 flex-wrap"
             >
               <Link href="/product/4">
                 <Button className="rounded-full text-sm md:text-base px-9 py-5 uppercase font-bold bg-red-800 text-white hover:bg-white hover:text-red-900 transition-all duration-500 shadow-2xl tracking-widest border border-red-600 hover:border-red-900">
                   {buy_button}
                 </Button>
               </Link>
+              <Button
+                onClick={() =>
+                  toast({
+                    title: t("sale-toast-title"),
+                    description: t("sale-toast-message"),
+                  })
+                }
+                className="rounded-full text-sm md:text-base px-9 py-5 uppercase font-bold bg-yellow-400 text-red-900 hover:bg-yellow-300 transition-all duration-500 shadow-2xl tracking-widest border border-yellow-500"
+              >
+                <Tag className="mr-2 h-4 w-4" />
+                {t("sale-button")}
+              </Button>
             </motion.div>
           </div>
 
