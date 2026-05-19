@@ -93,11 +93,6 @@ const PresentationSection = ({
                 key={product.id}
                 product_id={product.id}
                 product_type={product.product_type as ProductType}
-                image_url={
-                  product.product_image?.url
-                    ? (process.env.NEXT_PUBLIC_CMS_URL ?? "") + product.product_image.url
-                    : undefined
-                }
                 product_name={product.product_name}
               />
             </motion.div>

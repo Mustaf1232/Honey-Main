@@ -12,12 +12,10 @@ const static_images: Record<string, string> = {
 const ProductCard = ({
   product_type,
   product_id,
-  image_url,
   product_name,
 }: {
   product_type: string;
   product_id: number;
-  image_url?: string;
   product_name?: string;
 }) => {
   const image_src = static_images[product_type] ?? "/product_default.png";
