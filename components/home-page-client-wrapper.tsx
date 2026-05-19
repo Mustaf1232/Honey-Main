@@ -42,7 +42,7 @@ const HomePageClientWrapper = ({
 
   return (
     <main className="min-h-screen w-full h-full mx-auto">
-      <HoneyShopLandingComponent page_data={page_data} buy_button={order_button} />
+      <HoneyShopLandingComponent page_data={page_data} buy_button={order_button} product_data={product_data} />
 
       {/* Wave separator */}
       <div className="w-full overflow-hidden leading-none -mt-[2px] bg-background relative z-10">

@@ -3,22 +3,34 @@
 import { Button } from "./ui/button";
 import Link from "next/link";
 import RichText from "./rich-text";
-import type { HomePageData } from "@/types";
+import type { HomePageData, AllProducts } from "@/types";
 import { useTranslations, useLocale } from "next-intl";
 import { motion } from "framer-motion";
 import { useToast } from "@/hooks/use-toast";
-import { Tag } from "lucide-react";
+import { Tag, ChevronDown, ShoppingBag } from "lucide-react";
+import { Popover, PopoverContent, PopoverTrigger } from "./ui/popover";
+import { PopoverClose } from "@radix-ui/react-popover";
 
 export function HoneyShopLandingComponent({
   page_data,
   buy_button,
+  product_data,
 }: {
   page_data: HomePageData;
   buy_button: string;
+  product_data?: AllProducts;
 }) {
   const t = useTranslations("Landing");
   const locale = useLocale();
   const { toast } = useToast();
+
+  const handleSaleToast = () => {
+    toast({
+      title: t("sale-toast-title"),
+      description: t("sale-toast-message"),
+    });
+  };
+
   return (
     <div className="relative w-full overflow-hidden">
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -65,7 +77,7 @@ export function HoneyShopLandingComponent({
               className="h-px w-24 bg-white/30 mb-8"
             />
 
-            {/* buy button + sale button */}
+            {/* buy button + sale dropdown */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -77,18 +89,57 @@ export function HoneyShopLandingComponent({
                   {buy_button}
                 </Button>
               </Link>
-              <Button
-                onClick={() =>
-                  toast({
-                    title: t("sale-toast-title"),
-                    description: t("sale-toast-message"),
-                  })
-                }
-                className="rounded-full text-sm md:text-base px-9 py-5 uppercase font-bold bg-yellow-400 text-red-900 hover:bg-yellow-300 transition-all duration-500 shadow-2xl tracking-widest border border-yellow-500"
-              >
-                <Tag className="mr-2 h-4 w-4" />
-                {t("sale-button")}
-              </Button>
+
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button
+                    className="rounded-full text-sm md:text-base px-7 py-5 uppercase font-bold bg-yellow-400 text-red-900 hover:bg-yellow-300 transition-all duration-500 shadow-2xl tracking-widest border border-yellow-500"
+                  >
+                    <Tag className="mr-2 h-4 w-4" />
+                    {t("sale-button")}
+                    <ChevronDown className="ml-2 h-4 w-4" />
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className="w-72 p-0 rounded-2xl shadow-2xl border-0 overflow-hidden"
+                  sideOffset={10}
+                  align="start"
+                >
+                  {/* Header */}
+                  <div className="bg-yellow-400 px-4 py-3">
+                    <p className="font-bold text-red-900 text-sm uppercase tracking-wide">
+                      {t("sale-toast-title")}
+                    </p>
+                    <p className="text-red-900/70 text-xs mt-0.5">
+                      {t("sale-toast-message")}
+                    </p>
+                  </div>
+
+                  {/* Product list */}
+                  <div className="bg-white p-3 space-y-2">
+                    {product_data?.docs?.map((product) => (
+                      <PopoverClose asChild key={product.id}>
+                        <Link
+                          href={`/${locale}/product/${product.id}`}
+                          onClick={handleSaleToast}
+                        >
+                          <div className="flex items-center justify-between px-3 py-2.5 rounded-xl hover:bg-yellow-50 transition-colors cursor-pointer group border border-transparent hover:border-yellow-200">
+                            <div className="flex items-center gap-2">
+                              <ShoppingBag className="h-4 w-4 text-red-800 group-hover:text-red-900" />
+                              <span className="text-sm font-semibold text-gray-800 group-hover:text-red-900">
+                                {product.product_name}
+                              </span>
+                            </div>
+                            <span className="text-xs font-bold bg-yellow-400 text-red-900 px-2 py-0.5 rounded-full">
+                              -10%
+                            </span>
+                          </div>
+                        </Link>
+                      </PopoverClose>
+                    ))}
+                  </div>
+                </PopoverContent>
+              </Popover>
             </motion.div>
           </div>
 
@@ -118,17 +169,5 @@ export function HoneyShopLandingComponent({
         </div>
       </div>
     </div>
-  )
+  );
 }
-
-// export async function useAddToCart({
-//   product_id,
-//   quantity,
-//   price,
-// }: {
-//   product_id: string;
-//   quantity: number;
-//   price: string;
-// }) {
-//   const query_client = useQueryClient();
-// }
