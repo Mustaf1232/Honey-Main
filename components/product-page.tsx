@@ -7,16 +7,10 @@ import RichText from "./rich-text";
 import AddToCartWithCounter from "./add-to-cart-button";
 import { useSetCountry } from "@/context/CountryContext";
 
-const apply10PctDiscount = (price: number | null | undefined): string | null => {
-  if (price == null) return null;
-  return (Math.round(price * 0.9 * 100) / 100).toString();
-};
-
 const get_product_image = (product: Product): string => {
   if (product.product_type === "heart") return "/Heart.png";
   if (product.product_type === "stomach") return "/Belly.png";
   if (product.product_type === "default") return "/product_default.png";
-  // For any other type, prefer the CMS image if available, else fallback to default
   const cms_url = product.product_image?.url;
   return cms_url ? (process.env.NEXT_PUBLIC_CMS_URL ?? "") + cms_url : "/product_default.png";
 };
@@ -28,48 +22,39 @@ const get_country_price = (product: Product, country: string) => {
   let currency;
   switch (country) {
     case "Bosnia":
-      product_standart_price =
-        product.product_price_bosnia.bosnia_standart_price;
+      product_standart_price = product.product_price_bosnia.bosnia_standart_price;
       product_sale_price = product.product_price_bosnia.bosnia_sale_price;
       product_shipping = product.product_price_bosnia.bosnia_shipping_price;
       currency = product.product_price_bosnia.currency;
       break;
     case "Macedonia":
-      product_standart_price =
-        product.product_price_macedonia.macedonia_standart_price;
+      product_standart_price = product.product_price_macedonia.macedonia_standart_price;
       product_sale_price = product.product_price_macedonia.macedonia_sale_price;
       product_shipping = null;
       currency = product.product_price_macedonia.currency;
       break;
     case "Serbia":
-      product_standart_price =
-        product.product_price_serbia.serbia_standart_price;
+      product_standart_price = product.product_price_serbia.serbia_standart_price;
       product_sale_price = product.product_price_serbia.serbia_sale_price;
       product_shipping = null;
       currency = product.product_price_serbia.currency;
       break;
     case "Europe":
-      product_standart_price =
-        product.product_price_europe.europe_standart_price;
+      product_standart_price = product.product_price_europe.europe_standart_price;
       product_sale_price = product.product_price_europe.europe_sale_price;
       product_shipping = null;
       currency = product.product_price_europe.currency;
       break;
     case "America":
-      product_standart_price =
-        product.product_price_america.america_standart_price;
+      product_standart_price = product.product_price_america.america_standart_price;
       product_sale_price = product.product_price_america.america_sale_price;
       product_shipping = null;
       currency = product.product_price_america.currency;
       break;
   }
-  return {
-    product_standart_price,
-    product_sale_price,
-    product_shipping,
-    currency,
-  };
+  return { product_standart_price, product_sale_price, product_shipping, currency };
 };
+
 export default function ProductPageComponent({
   product,
   all_products,
@@ -80,11 +65,10 @@ export default function ProductPageComponent({
   buy_button: string;
 }) {
   const { country } = useSetCountry();
-
   const pricing = get_country_price(product, country as string);
 
   return (
-    <div className="mx-auto max-w-7xl  px-4 py-8">
+    <div className="mx-auto max-w-7xl px-4 py-8">
       <Card className="overflow-hidden shadow-none border-red-800/10">
         <div className="md:flex md:items-center md:justify-between">
           <div className="md:w-1/2">
@@ -98,19 +82,25 @@ export default function ProductPageComponent({
           </div>
           <CardContent className="md:w-1/2 p-6 py-24">
             <h1 className="text-3xl font-bold mb-4">{product.product_name}</h1>
-            <div className="flex items-center gap-3 text-2xl font-bold mb-2">
-              <p className="text-red-300 line-through text-xl">
+            {pricing.product_sale_price === null && (
+              <div className="text-2xl font-bold mb-6">
                 {pricing.product_standart_price} {pricing.currency}
-              </p>
-              <p>
-                {apply10PctDiscount(pricing.product_standart_price as number)} {pricing.currency}
-              </p>
-              <span className="text-sm font-semibold bg-yellow-400 text-red-900 px-2 py-1 rounded-full">-10%</span>
-            </div>
+              </div>
+            )}
+            {pricing.product_sale_price !== null && (
+              <div className="flex items-center space-x-4 text-2xl font-bold mb-6">
+                <p className="text-red-300 line-through text-xl">
+                  {pricing.product_standart_price} {pricing.currency}
+                </p>
+                <p>
+                  {pricing.product_sale_price} {pricing.currency}
+                </p>
+              </div>
+            )}
             <AddToCartWithCounter
               buy_button_text={buy_button}
               product_id={product.id.toString()}
-              product_sale_price={apply10PctDiscount(pricing.product_standart_price as number) ?? ""}
+              product_sale_price={pricing.product_sale_price?.toString() ?? ""}
               product_name={product.product_name}
               product_picture_url={get_product_image(product)}
               price={pricing.product_standart_price?.toString() ?? ""}
@@ -148,7 +138,6 @@ const RelatedProductCards = ({
     <div className="grid md:grid-cols-2 gap-6 pt-8">
       {products.docs.map((product: Product) => {
         const pricing = get_country_price(product, country as string);
-
         if (product.id === current_product) return null;
         const image_src = get_product_image(product);
 
@@ -169,17 +158,23 @@ const RelatedProductCards = ({
                   content={product.product_description}
                 />
               </Link>
-              <div className="flex items-center gap-2 text-lg font-bold mb-4 mt-2">
-                <p className="text-red-300 line-through text-base">
+              {pricing.product_sale_price === null && (
+                <div className="text-lg font-bold mb-4 mt-2">
                   {pricing.product_standart_price} {pricing.currency}
-                </p>
-                <p>{apply10PctDiscount(pricing.product_standart_price as number)} {pricing.currency}</p>
-                <span className="text-xs font-semibold bg-yellow-400 text-red-900 px-2 py-0.5 rounded-full">-10%</span>
-              </div>
+                </div>
+              )}
+              {pricing.product_sale_price !== null && (
+                <div className="flex items-center space-x-4 text-lg font-bold mb-4 mt-2">
+                  <p className="text-red-300 line-through text-base">
+                    {pricing.product_standart_price} {pricing.currency}
+                  </p>
+                  <p>{pricing.product_sale_price} {pricing.currency}</p>
+                </div>
+              )}
               <AddToCartWithCounter
                 buy_button_text={buy_button}
                 product_id={product.id.toString()}
-                product_sale_price={apply10PctDiscount(pricing.product_standart_price as number) ?? ""}
+                product_sale_price={pricing.product_sale_price?.toString() ?? ""}
                 product_name={product.product_name}
                 product_picture_url={image_src}
                 price={pricing.product_standart_price?.toString() ?? ""}
