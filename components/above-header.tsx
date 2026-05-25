@@ -6,7 +6,7 @@ import { useSetCountry } from "@/context/CountryContext";
 import { useRouter } from "next/navigation";
 import type { ContactInfoType } from "@/types";
 import Link from "next/link";
-import { X } from "lucide-react";
+import { MapPin, X } from "lucide-react";
 
 const AboveHeader = ({
   locale,
@@ -25,40 +25,50 @@ const AboveHeader = ({
   };
 
   return (
-    <div className="w-full border-b border-red-900/8 bg-white">
-      <div className="max-w-7xl mx-auto px-5 py-1.5 flex items-center justify-between">
+    <div className="w-full bg-gradient-to-r from-red-950 via-red-900 to-red-950">
+      <div className="max-w-7xl mx-auto px-4 sm:px-5 flex items-center justify-between h-9 gap-4">
 
-        {/* Social links */}
-        <div className="flex items-center gap-3">
+        {/* Social icons */}
+        <div className="flex items-center gap-1.5">
           <Link
             href={contact_info?.facebook ?? "#"}
-            className="text-gray-400 hover:text-red-800 transition-colors"
             aria-label="Facebook"
+            className="flex items-center justify-center w-6 h-6 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200"
           >
             <FacebookIcon />
           </Link>
           <Link
             href={contact_info?.instagram ?? "#"}
-            className="text-gray-400 hover:text-red-800 transition-colors"
             aria-label="Instagram"
+            className="flex items-center justify-center w-6 h-6 rounded-full text-white/60 hover:text-white hover:bg-white/10 transition-all duration-200"
           >
             <InstagramIcon />
           </Link>
         </div>
 
+        {/* Centre tagline — hidden on very small screens */}
+        <p className="hidden sm:block text-[10px] font-semibold text-white/40 tracking-[0.25em] uppercase select-none">
+          100% Prirodan · Med za mršavljenje
+        </p>
+
         {/* Country + Language */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5">
           {country_name && (
             <button
               onClick={handle_change_country}
-              className="flex items-center gap-1 text-xs text-gray-500 hover:text-red-900 transition-colors px-2 py-1 rounded-full hover:bg-red-50"
+              className="flex items-center gap-1 text-[11px] font-medium text-white/70 hover:text-white transition-colors px-2 py-0.5 rounded-full hover:bg-white/10 border border-white/10 hover:border-white/20"
             >
+              <MapPin className="h-2.5 w-2.5" />
               {country_name}
-              <X className="h-3 w-3" />
+              <X className="h-2.5 w-2.5 opacity-60" />
             </button>
           )}
-          <LanguageSwitch locale={locale} />
+          {/* Language switch wrapper — keeps white bg contained */}
+          <div className="scale-[0.82] origin-right -mr-1">
+            <LanguageSwitch locale={locale} />
+          </div>
         </div>
+
       </div>
     </div>
   );

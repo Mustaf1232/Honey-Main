@@ -5,7 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import Cart from "./cart";
 import type { Menu, MenuItem } from "@/types";
 import { useWindowSize } from "@/hooks/use-window-size";
-
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -29,20 +29,25 @@ const Header = ({ menu }: { menu: Menu }) => {
     <header
       className={`sticky top-0 z-40 w-full transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-[0_1px_24px_0_rgba(127,29,29,0.08)] border-b border-red-900/8"
-          : "bg-white/80 backdrop-blur-sm"
+          ? "bg-white/95 backdrop-blur-md shadow-[0_2px_24px_0_rgba(127,29,29,0.10)] border-b border-red-900/10"
+          : "bg-white/85 backdrop-blur-sm"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-5 py-3 flex items-center justify-between gap-4">
+      <div className="max-w-7xl mx-auto px-5 py-2 flex items-center justify-between gap-4">
 
-        {/* Brand */}
+        {/* Brand logo */}
         <Link href="/" className="shrink-0">
-          <span className="text-red-900 font-extrabold text-base md:text-lg tracking-tight leading-tight select-none">
-            Med za mršavljenje
-          </span>
+          <Image
+            src="/Medza1.png"
+            alt="Medza logo"
+            width={140}
+            height={48}
+            className="h-10 w-auto object-contain"
+            priority
+          />
         </Link>
 
-        {/* Desktop nav — centred */}
+        {/* Desktop nav */}
         {!is_sm && (
           <nav className="flex items-center gap-1">
             {menu?.menu_items?.map((item: MenuItem) => {
@@ -68,7 +73,7 @@ const Header = ({ menu }: { menu: Menu }) => {
         )}
 
         {/* Right actions */}
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1 shrink-0">
           {is_sm && (
             <Sheet>
               <SheetTrigger
@@ -77,31 +82,41 @@ const Header = ({ menu }: { menu: Menu }) => {
               >
                 <MenuIcon />
               </SheetTrigger>
-              <SheetContent side="left" className="w-72 p-0 border-r-red-900/10">
-                {/* Drawer brand strip */}
-                <div className="bg-red-900 px-6 pt-10 pb-8">
-                  <span className="text-white font-extrabold text-xl tracking-tight leading-tight">
-                    Med za mršavljenje
-                  </span>
+
+              <SheetContent side="left" className="w-[280px] p-0 border-r border-red-900/10">
+                {/* Drawer top — logo on red */}
+                <div className="bg-gradient-to-br from-red-950 to-red-800 px-6 pt-12 pb-8">
+                  <Image
+                    src="/Medza1.png"
+                    alt="Medza logo"
+                    width={120}
+                    height={40}
+                    className="h-9 w-auto object-contain brightness-0 invert"
+                  />
+                  <p className="mt-3 text-xs text-white/60 font-medium tracking-widest uppercase">
+                    100% Prirodan
+                  </p>
                 </div>
-                {/* Links */}
-                <nav className="flex flex-col gap-1 px-3 py-5">
+
+                {/* Nav links */}
+                <nav className="flex flex-col gap-0.5 px-3 py-4">
                   {menu?.menu_items?.map((item: MenuItem) => (
                     <SheetClose key={item.id} asChild>
                       <Link
                         href={item.url}
-                        className="flex items-center px-4 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-red-50 hover:text-red-900 transition-colors"
+                        className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-red-50 hover:text-red-900 transition-colors"
                       >
+                        <span className="w-1 h-1 rounded-full bg-red-800/40 group-hover:bg-red-800" />
                         {item.title}
                       </Link>
                     </SheetClose>
                   ))}
                 </nav>
+
                 {/* Drawer footer */}
-                <div className="absolute bottom-8 left-6 right-6">
-                  <div className="h-px bg-red-900/10 mb-4" />
-                  <p className="text-xs text-gray-400 text-center">
-                    100% Prirodan med
+                <div className="absolute bottom-0 left-0 right-0 px-6 py-5 border-t border-red-900/8">
+                  <p className="text-[11px] text-gray-400 text-center tracking-wide">
+                    Med za mršavljenje
                   </p>
                 </div>
               </SheetContent>
@@ -121,8 +136,8 @@ export default Header;
 export const FacebookIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="15"
-    height="15"
+    width="14"
+    height="14"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -137,8 +152,8 @@ export const FacebookIcon = () => (
 export const InstagramIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="15"
-    height="15"
+    width="14"
+    height="14"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -155,8 +170,8 @@ export const InstagramIcon = () => (
 const MenuIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="16"
-    height="16"
+    width="17"
+    height="17"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
