@@ -40,9 +40,9 @@ const Header = ({ menu }: { menu: Menu }) => {
           <Image
             src="/Medza1.png"
             alt="Medza logo"
-            width={140}
-            height={48}
-            className="h-10 w-auto object-contain"
+            width={180}
+            height={60}
+            className="h-14 w-auto object-contain"
             priority
           />
         </Link>
@@ -89,9 +89,9 @@ const Header = ({ menu }: { menu: Menu }) => {
                   <Image
                     src="/Medza1.png"
                     alt="Medza logo"
-                    width={120}
-                    height={40}
-                    className="h-9 w-auto object-contain brightness-0 invert"
+                    width={160}
+                    height={52}
+                    className="h-12 w-auto object-contain brightness-0 invert"
                   />
                   <p className="mt-3 text-xs text-white/60 font-medium tracking-widest uppercase">
                     100% Prirodan

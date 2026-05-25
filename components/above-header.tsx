@@ -63,9 +63,7 @@ const AboveHeader = ({
               <X className="h-2.5 w-2.5 opacity-60" />
             </button>
           )}
-          <div className="scale-[0.82] origin-right -mr-1">
-            <LanguageSwitch locale={locale} />
-          </div>
+          <LanguageSwitch locale={locale} variant="dark" />
         </div>
 
       </div>

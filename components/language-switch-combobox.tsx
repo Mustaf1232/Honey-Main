@@ -18,20 +18,25 @@ import {
 } from "@/components/ui/popover";
 
 const frameworks = [
-  {
-    value: "bs",
-    label: "🇧🇦",
-  },
-  {
-    value: "en",
-    label: "🇬🇧",
-  },
+  { value: "bs", label: "🇧🇦", short: "BS" },
+  { value: "en", label: "🇬🇧", short: "EN" },
 ];
 
-export function LanguageSwitch({ locale }: { locale: string }) {
+export function LanguageSwitch({
+  locale,
+  variant = "light",
+}: {
+  locale: string;
+  variant?: "light" | "dark";
+}) {
   const [open, setOpen] = React.useState(false);
   const [value, setValue] = React.useState<string>(locale);
   const router = useRouter();
+
+  const current = frameworks.find((f) => f.value === value);
+
+  const isDark = variant === "dark";
+
   return (
     <Popover open={open} onOpenChange={setOpen}>
       <PopoverTrigger asChild>
@@ -39,16 +44,31 @@ export function LanguageSwitch({ locale }: { locale: string }) {
           variant="outline"
           role="combobox"
           aria-expanded={open}
-          className="w-20 justify-between rounded-2xl bg-white border-none outline-none shadow-none hover:bg-white py-2 data-[state=open]:rounded-b-none"
+          className={cn(
+            "h-7 px-2.5 gap-1.5 justify-between rounded-full text-xs font-semibold border transition-all",
+            isDark
+              ? "bg-white/10 border-white/20 text-white hover:bg-white/20 hover:border-white/30 shadow-none"
+              : "bg-white border-none shadow-none hover:bg-white py-2 rounded-2xl w-20 data-[state=open]:rounded-b-none"
+          )}
         >
-          {value
-            ? frameworks.find((framework) => framework.value === value)?.label
-            : "Select language"}
-          <ChevronDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          <span>{current?.label}</span>
+          <span className={isDark ? "text-white/70" : "text-gray-500"}>
+            {current?.short}
+          </span>
+          <ChevronDown className={cn("h-3 w-3 shrink-0", isDark ? "text-white/50" : "opacity-50")} />
         </Button>
       </PopoverTrigger>
-      <PopoverContent className="w-20 p-0 bg-white rounded-2xl">
-        <Command className="bg-white hover:bg-white focus:bg-white active:bg-white rounded-2xl ">
+      <PopoverContent
+        className={cn(
+          "w-28 p-1 rounded-xl border shadow-lg",
+          isDark
+            ? "bg-red-950 border-white/10"
+            : "bg-white rounded-2xl border-none"
+        )}
+        sideOffset={6}
+        align="end"
+      >
+        <Command className={cn("rounded-xl", isDark ? "bg-red-950" : "bg-white")}>
           <CommandList>
             <CommandGroup>
               {frameworks.map((framework) => (
@@ -62,12 +82,20 @@ export function LanguageSwitch({ locale }: { locale: string }) {
                     });
                     setOpen(false);
                   }}
+                  className={cn(
+                    "flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs font-semibold cursor-pointer",
+                    isDark
+                      ? "text-white/80 hover:bg-white/10 hover:text-white data-[selected=true]:bg-white/10"
+                      : "hover:bg-gray-50"
+                  )}
                 >
-                  {framework.label}
+                  <span>{framework.label}</span>
+                  <span>{framework.short}</span>
                   <Check
                     className={cn(
-                      "ml-2 h-4 w-4",
-                      value === framework.value ? "opacity-100" : "opacity-0"
+                      "ml-auto h-3 w-3",
+                      value === framework.value ? "opacity-100" : "opacity-0",
+                      isDark ? "text-white" : ""
                     )}
                   />
                 </CommandItem>
