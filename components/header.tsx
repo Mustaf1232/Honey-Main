@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import Cart from "./cart";
 import type { Menu, MenuItem } from "@/types";
 import { useWindowSize } from "@/hooks/use-window-size";
+import Image from "next/image";
 import {
   Sheet,
   SheetContent,
@@ -36,9 +37,7 @@ const Header = ({ menu }: { menu: Menu }) => {
 
         {/* Brand */}
         <Link href="/" className="shrink-0">
-          <span className="text-red-900 font-extrabold text-lg tracking-tight select-none">
-            Medza
-          </span>
+          <Image src="/honey.png" alt="Logo" width={48} height={48} className="h-10 w-auto" />
         </Link>
 
         {/* Desktop nav — centred */}
@@ -78,10 +77,8 @@ const Header = ({ menu }: { menu: Menu }) => {
               </SheetTrigger>
               <SheetContent side="left" className="w-72 p-0 border-r-red-900/10">
                 {/* Drawer brand strip */}
-                <div className="bg-red-900 px-6 pt-10 pb-8">
-                  <span className="text-white font-extrabold text-2xl tracking-tight">
-                    Medza
-                  </span>
+                <div className="bg-red-900 px-6 pt-10 pb-8 flex items-center">
+                  <Image src="/honey.png" alt="Logo" width={48} height={48} className="h-10 w-auto brightness-0 invert" />
                 </div>
                 {/* Links */}
                 <nav className="flex flex-col gap-1 px-3 py-5">
