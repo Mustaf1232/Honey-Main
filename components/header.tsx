@@ -5,7 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 import Cart from "./cart";
 import type { Menu, MenuItem } from "@/types";
 import { useWindowSize } from "@/hooks/use-window-size";
-import Image from "next/image";
+
 import {
   Sheet,
   SheetContent,
@@ -37,7 +37,9 @@ const Header = ({ menu }: { menu: Menu }) => {
 
         {/* Brand */}
         <Link href="/" className="shrink-0">
-          <Image src="/honey.png" alt="Logo" width={48} height={48} className="h-10 w-auto" />
+          <span className="text-red-900 font-extrabold text-base md:text-lg tracking-tight leading-tight select-none">
+            Med za mršavljenje
+          </span>
         </Link>
 
         {/* Desktop nav — centred */}
@@ -49,8 +51,8 @@ const Header = ({ menu }: { menu: Menu }) => {
                 <Link
                   key={item.id}
                   href={item.url}
-                  className={`relative px-4 py-2 text-sm font-medium transition-colors duration-200 group rounded-full ${
-                    active ? "text-red-900" : "text-gray-600 hover:text-red-900"
+                  className={`relative px-4 py-2 text-sm font-bold transition-colors duration-200 group rounded-full ${
+                    active ? "text-red-900" : "text-gray-700 hover:text-red-900"
                   }`}
                 >
                   {item.title}
@@ -77,8 +79,10 @@ const Header = ({ menu }: { menu: Menu }) => {
               </SheetTrigger>
               <SheetContent side="left" className="w-72 p-0 border-r-red-900/10">
                 {/* Drawer brand strip */}
-                <div className="bg-red-900 px-6 pt-10 pb-8 flex items-center">
-                  <Image src="/honey.png" alt="Logo" width={48} height={48} className="h-10 w-auto brightness-0 invert" />
+                <div className="bg-red-900 px-6 pt-10 pb-8">
+                  <span className="text-white font-extrabold text-xl tracking-tight leading-tight">
+                    Med za mršavljenje
+                  </span>
                 </div>
                 {/* Links */}
                 <nav className="flex flex-col gap-1 px-3 py-5">
@@ -86,7 +90,7 @@ const Header = ({ menu }: { menu: Menu }) => {
                     <SheetClose key={item.id} asChild>
                       <Link
                         href={item.url}
-                        className="flex items-center px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-red-50 hover:text-red-900 transition-colors"
+                        className="flex items-center px-4 py-3 rounded-xl text-sm font-bold text-gray-700 hover:bg-red-50 hover:text-red-900 transition-colors"
                       >
                         {item.title}
                       </Link>
