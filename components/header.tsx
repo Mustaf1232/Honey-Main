@@ -85,14 +85,16 @@ const Header = ({ menu }: { menu: Menu }) => {
 
               <SheetContent side="left" className="w-[280px] p-0 border-r border-red-900/10">
                 {/* Drawer top — logo on red */}
-                <div className="bg-gradient-to-br from-red-950 to-red-800 px-6 pt-12 pb-8">
-                  <Image
-                    src="/Medza1.png"
-                    alt="Medza logo"
-                    width={160}
-                    height={52}
-                    className="h-12 w-auto object-contain brightness-0 invert"
-                  />
+                <div className="bg-gradient-to-br from-red-950 to-red-800 px-6 pt-10 pb-6 flex flex-col items-center justify-center">
+                  <div className="w-full flex items-center justify-center">
+                    <Image
+                      src="/Medza1.png"
+                      alt="Medza logo"
+                      width={220}
+                      height={72}
+                      className="w-[75%] h-auto object-contain brightness-0 invert"
+                    />
+                  </div>
                   <p className="mt-3 text-xs text-white/60 font-medium tracking-widest uppercase">
                     100% Prirodan
                   </p>
