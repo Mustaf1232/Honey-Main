@@ -61,18 +61,26 @@ const HomePageClientWrapper = ({
       />
       <InfoSection page_data={page_data} />
       <ScienceSection title={science_section_title} studies={science_array} />
-      <div className="pt-32" />
       <RecipeSection recipe_paragraph={recipe_section_paragraph} />
-      <div className="pt-32" />
-      {/* <TestimonialSection
-        testimonial_title={testimonial_title}
-        testiominals={testimonials}
-      /> */}
-      <Link href="/product/4" className="w-full flex items-center justify-center">
-        <Button className="rounded-full text-md px-8 py-6 min-w-[150px] z-30 uppercase font-semibold text-background background-noise hover:bg-red-900 transition-all duration-500 hover:text-background">
-          {order_button}
-        </Button>
-      </Link>
+
+      {/* CTA section */}
+      <section className="w-full bg-gradient-to-b from-white to-red-50/60 py-20 px-4">
+        <div className="flex flex-col items-center gap-5">
+          <div className="flex items-center gap-3">
+            <span className="h-px w-8 bg-red-800/30" />
+            <span className="text-xs font-bold text-red-800 tracking-[0.2em] uppercase">Naruči danas</span>
+            <span className="h-px w-8 bg-red-800/30" />
+          </div>
+          <p className="text-gray-500 text-sm text-center max-w-xs">
+            100% prirodan med — isporučujemo na vašu adresu
+          </p>
+          <Link href="/product/4">
+            <Button className="rounded-full text-sm px-10 py-6 uppercase font-bold bg-red-900 text-white hover:bg-red-800 transition-all duration-300 shadow-lg shadow-red-900/20 tracking-widest">
+              {order_button}
+            </Button>
+          </Link>
+        </div>
+      </section>
 
     </main>
   )

@@ -1,84 +1,46 @@
 "use client";
 import type { Children } from "./rich-text/serialize";
 import RichText from "@/components/rich-text";
-const RecipeSection = ({
-  recipe_paragraph,
-}: {
-  recipe_paragraph: Children;
-}) => {
+import { useInView } from "react-intersection-observer";
+import { motion } from "framer-motion";
+
+const RecipeSection = ({ recipe_paragraph }: { recipe_paragraph: Children }) => {
+  const { ref, inView } = useInView({ threshold: 0.15 });
+
   return (
-    <section className="max-w-7xl mx-auto flex pt-14 px-4">
-      <div className="w-full text-center">
-        <RichText content={recipe_paragraph} className="text-center" />
-      </div>
+    <section className="w-full bg-white py-24 px-4">
+      <motion.div
+        ref={ref}
+        initial={{ opacity: 0, y: 20 }}
+        animate={inView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.6 }}
+        className="max-w-3xl mx-auto"
+      >
+        {/* Decorative top divider */}
+        <div className="flex items-center justify-center gap-4 mb-10">
+          <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
+          <span className="w-2 h-2 rounded-full bg-red-800/40" />
+          <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
+        </div>
+
+        <RichText
+          content={recipe_paragraph}
+          className="text-center
+            [&_h1]:text-3xl [&_h1]:md:text-4xl [&_h1]:font-extrabold [&_h1]:text-gray-900 [&_h1]:mb-4
+            [&_h2]:text-2xl [&_h2]:font-bold [&_h2]:text-gray-800 [&_h2]:mb-3
+            [&_p]:text-gray-500 [&_p]:leading-relaxed [&_p]:text-base [&_p]:md:text-lg [&_p]:mt-3
+            [&_strong]:text-red-900"
+        />
+
+        {/* Decorative bottom divider */}
+        <div className="flex items-center justify-center gap-4 mt-10">
+          <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
+          <span className="w-2 h-2 rounded-full bg-red-800/40" />
+          <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
+        </div>
+      </motion.div>
     </section>
   );
 };
+
 export default RecipeSection;
-export type IngredientType = {
-  id: string;
-  name: string;
-  image_src: string;
-  ingredient_color: string;
-};
-// const IngredientGrid = () => {
-//   const ingredients: IngredientType[] = [
-//     {
-//       id: "pom",
-//       name: "Nar - Najljekovitije voće na svijetu",
-//       image_src: "/pom.png",
-//       ingredient_color: "bg-white",
-//     },
-//     {
-//       id: "turmeric",
-//       name: "Kurkuma - Ljekoviti začin koji zamjenjuje i kutiju lijekova",
-//       image_src: "/turmeric.webp",
-//       ingredient_color: "bg-white",
-//     },
-//     {
-//       id: "gymnema",
-//       name: "Gurmar - Rzarač šećera",
-//       image_src: "/gymnema.png",
-//       ingredient_color: "bg-white",
-//     },
-//     {
-//       id: "frankincense",
-//       name: "Tamjan",
-//       image_src: "/frankincense.webp",
-//       ingredient_color: "bg-white",
-//     },
-//     {
-//       id: "griffonia",
-//       name: "Griffonia",
-//       image_src: "/griffonia.png",
-//       ingredient_color: "bg-white",
-//     },
-//     {
-//       id: "grape",
-//       name: "Grape",
-//       image_src: "/grape.png",
-//       ingredient_color: "bg-white",
-//     },
-//   ];
-//   return (
-//     <div className="grid grid-cols-3 justify-items-center gap-4">
-//       {ingredients.map((ingredient: IngredientType) => {
-//         return (
-//           <div
-//             key={ingredient.id}
-//             className={`w-full h-full  relative rounded-md space-x-4 flex items-center justify-center`}
-//           >
-//             <div className="w-32 h-32 relative">
-//               <Image
-//                 src={ingredient.image_src}
-//                 alt={ingredient.name}
-//                 fill
-//                 className={`object-contain object-center rounded-full p-1 ${ingredient.ingredient_color} `}
-//               />
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
