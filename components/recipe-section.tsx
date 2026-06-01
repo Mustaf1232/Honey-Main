@@ -8,16 +8,15 @@ const RecipeSection = ({ recipe_paragraph }: { recipe_paragraph: Children }) => 
   const { ref, inView } = useInView({ threshold: 0.15 });
 
   return (
-    <section className="w-full bg-background py-24 px-4 relative">
-      <div className="absolute inset-0 background-noise-transparent opacity-40 pointer-events-none" />
-
+    <section className="w-full bg-white py-24 px-4">
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 20 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto relative z-10"
+        className="max-w-3xl mx-auto"
       >
+        {/* Decorative top divider */}
         <div className="flex items-center justify-center gap-4 mb-10">
           <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
           <span className="w-2 h-2 rounded-full bg-red-800/40" />
@@ -33,6 +32,7 @@ const RecipeSection = ({ recipe_paragraph }: { recipe_paragraph: Children }) => 
             [&_strong]:text-red-900"
         />
 
+        {/* Decorative bottom divider */}
         <div className="flex items-center justify-center gap-4 mt-10">
           <span className="h-px flex-1 max-w-[80px] bg-red-900/15" />
           <span className="w-2 h-2 rounded-full bg-red-800/40" />
