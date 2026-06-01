@@ -4,16 +4,16 @@ import Link from "next/link";
 
 export default function Footer({ menu }: { menu: Menu }) {
   return (
-    <footer className="w-full bg-red-950 text-white">
-      {/* Main footer content */}
-      <div className="max-w-7xl mx-auto px-6 py-14">
+    <footer className="w-full bg-red-950 text-white relative overflow-hidden">
+      {/* noise texture — same as other red sections */}
+      <div className="absolute inset-0 background-noise-transparent opacity-25 pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-6 py-14 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-10 border-b border-white/10">
 
-          {/* Brand column */}
+          {/* Brand */}
           <div>
-            <p className="font-extrabold text-lg tracking-tight mb-3">
-              Med za mršavljenje
-            </p>
+            <p className="font-extrabold text-lg tracking-tight mb-3">Med za mršavljenje</p>
             <p className="text-white/45 text-sm leading-relaxed max-w-[220px]">
               100% prirodan med obogaćen ljekovitim biljem za zdravlje i vitalnost.
             </p>
@@ -21,9 +21,7 @@ export default function Footer({ menu }: { menu: Menu }) {
 
           {/* Navigation */}
           <div>
-            <p className="text-[11px] font-bold text-white/35 tracking-[0.2em] uppercase mb-4">
-              Navigacija
-            </p>
+            <p className="text-[11px] font-bold text-white/35 tracking-[0.2em] uppercase mb-4">Navigacija</p>
             <nav className="flex flex-col gap-2.5">
               {menu?.menu_items?.map((item: MenuItem) => (
                 <Link
@@ -39,9 +37,7 @@ export default function Footer({ menu }: { menu: Menu }) {
 
           {/* Social */}
           <div>
-            <p className="text-[11px] font-bold text-white/35 tracking-[0.2em] uppercase mb-4">
-              Pratite nas
-            </p>
+            <p className="text-[11px] font-bold text-white/35 tracking-[0.2em] uppercase mb-4">Pratite nas</p>
             <div className="flex gap-3">
               <a
                 href="#"
@@ -62,14 +58,11 @@ export default function Footer({ menu }: { menu: Menu }) {
 
         </div>
 
-        {/* Bottom bar */}
         <div className="pt-6 flex flex-col md:flex-row items-center justify-between gap-3">
           <p className="text-white/30 text-xs">
             &copy; {new Date().getFullYear()} Med za mršavljenje. Sva prava zadržana.
           </p>
-          <p className="text-white/20 text-xs">
-            100% Prirodan · Bez konzervansa
-          </p>
+          <p className="text-white/20 text-xs">100% Prirodan · Bez konzervansa</p>
         </div>
       </div>
     </footer>

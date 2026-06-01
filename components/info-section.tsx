@@ -18,20 +18,20 @@ const InfoSection = ({ page_data }: { page_data: HomePageData }) => {
   const info_section_faq = page_data.question_array;
 
   return (
-    <section className="w-full bg-stone-50 py-24 px-4">
+    <section className="w-full bg-background py-24 px-4 relative">
+      {/* noise texture overlay */}
+      <div className="absolute inset-0 background-noise-transparent opacity-40 pointer-events-none" />
+
       <motion.div
         ref={ref}
         initial={{ opacity: 0, y: 24 }}
         animate={inView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.6 }}
-        className="max-w-3xl mx-auto"
+        className="max-w-3xl mx-auto relative z-10"
       >
-        {/* Section eyebrow */}
         <div className="flex items-center justify-center gap-3 mb-5">
           <span className="h-px w-10 bg-red-800/30" />
-          <span className="text-xs font-bold text-red-800 tracking-[0.2em] uppercase">
-            FAQ
-          </span>
+          <span className="text-xs font-bold text-red-800 tracking-[0.2em] uppercase">FAQ</span>
           <span className="h-px w-10 bg-red-800/30" />
         </div>
 
@@ -58,9 +58,8 @@ const HomePageFaq = ({ info_section_faq }: { info_section_faq: InfoSectionFaqs }
         <AccordionItem
           key={faq.id}
           value={faq.id}
-          className="bg-white rounded-2xl border border-red-900/8 px-6 shadow-sm
-            data-[state=open]:border-red-900/20 data-[state=open]:shadow-md
-            transition-all duration-200"
+          className="bg-white/80 backdrop-blur-sm rounded-2xl border border-red-900/8 px-6 shadow-sm
+            data-[state=open]:border-red-900/20 data-[state=open]:shadow-md transition-all duration-200"
         >
           <AccordionTrigger className="py-5 text-left hover:no-underline [&>svg]:text-red-800">
             <h2 className="text-base md:text-lg font-bold text-gray-800 pr-4 leading-snug">
@@ -68,9 +67,7 @@ const HomePageFaq = ({ info_section_faq }: { info_section_faq: InfoSectionFaqs }
             </h2>
           </AccordionTrigger>
           <AccordionContent className="pb-5">
-            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-              {faq.answer}
-            </p>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">{faq.answer}</p>
           </AccordionContent>
         </AccordionItem>
       ))}
