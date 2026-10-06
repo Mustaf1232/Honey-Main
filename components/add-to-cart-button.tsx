@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { useCart } from "@/context/CartContext";
 import { useRouter } from "@/i18n/navigation";
 import { useToast } from "@/hooks/use-toast";
+import { track_meta_event } from "@/lib/meta-pixel";
 
 export default function AddToCartWithCounter({
   initialCount = 1,
@@ -39,6 +40,15 @@ export default function AddToCartWithCounter({
 
   const alreadyInCart = cart_data?.items?.some((item) => item.id === product_id) ?? false;
 
+  const track_add_to_cart = (quantity: number) => {
+    const unit_price = parseFloat(product_sale_price || price);
+    track_meta_event("AddToCart", {
+      items: [{ id: product_id, quantity }],
+      value: unit_price * quantity,
+      currency,
+    });
+  };
+
   const handleAddToCart = () => {
     add_to_cart(
       {
@@ -53,6 +63,7 @@ export default function AddToCartWithCounter({
       },
       {
         onSuccess: () => {
+          track_add_to_cart(count);
           toast({
             title: "Added to cart",
             description: `${product_name} (x${count}) has been added to your cart.`,
@@ -79,7 +90,12 @@ export default function AddToCartWithCounter({
         currency,
         shipping,
       },
-      { onSuccess: () => router.push("/checkout") },
+      {
+        onSuccess: () => {
+          track_add_to_cart(count);
+          router.push("/checkout");
+        },
+      },
     );
   };
 

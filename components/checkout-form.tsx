@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { track_meta_event } from "@/lib/meta-pixel";
 import { useSetCountry } from "@/context/CountryContext";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -62,6 +63,26 @@ export default function CheckoutForm({
     },
   });
 
+  const get_pixel_items = () =>
+    (cart_data?.items ?? []).map((item: CartItem) => ({
+      id: item.id,
+      quantity: item.quantity,
+    }));
+
+  // fire once, when the cart has loaded with items in it
+  const has_cart_items = (cart_data?.items?.length ?? 0) > 0;
+  const checkout_tracked = useRef(false);
+  useEffect(() => {
+    if (!has_cart_items || checkout_tracked.current) return;
+    checkout_tracked.current = true;
+    track_meta_event("InitiateCheckout", {
+      items: get_pixel_items(),
+      value: cart_data?.total,
+      currency: cart_data?.currency,
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [has_cart_items]);
+
   const onSubmit = async (data: FormData) => {
     const d = new Date();
 
@@ -102,6 +123,11 @@ export default function CheckoutForm({
     };
     try {
       await place_order(order_object);
+      track_meta_event("Purchase", {
+        items: get_pixel_items(),
+        value: cart_data!.total,
+        currency: cart_data!.currency,
+      });
       setIsSuccess(true);
       clear_cart_contents({ cart_key: cart_data!.id });
       set_first_order_false();

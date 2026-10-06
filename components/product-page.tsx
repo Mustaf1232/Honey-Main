@@ -1,4 +1,6 @@
 "use client";
+import { useEffect } from "react";
+import { track_meta_event } from "@/lib/meta-pixel";
 import Image from "next/image";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import Link from "next/link";
@@ -66,6 +68,17 @@ export default function ProductPageComponent({
 }) {
   const { country } = useSetCountry();
   const pricing = get_country_price(product, country as string);
+  const view_price = pricing.product_sale_price ?? pricing.product_standart_price;
+
+  useEffect(() => {
+    // wait until the country (and with it the price) has loaded
+    if (view_price == null) return;
+    track_meta_event("ViewContent", {
+      items: [{ id: product.id.toString(), quantity: 1 }],
+      value: view_price,
+      currency: pricing.currency,
+    });
+  }, [product.id, view_price, pricing.currency]);
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8">
