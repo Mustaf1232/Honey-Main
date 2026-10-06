@@ -4,6 +4,8 @@ export const dynamic = "force-dynamic";
 
 const BRAND = "Med za mršavljenje";
 const LOCALE = "bs";
+// every product is listed once per suffix; the "-2" rows are feed-only duplicates
+const ID_SUFFIXES = ["", "-2"];
 
 const COUNTRIES = ["bosnia", "macedonia", "serbia", "europe", "america"] as const;
 type Country = (typeof COUNTRIES)[number];
@@ -77,9 +79,9 @@ export async function GET(request: Request) {
   for (const product of [...products.docs].sort((a, b) => a.id - b.id)) {
     const pricing = get_country_price(product, country);
     if (pricing.standart_price == null || !pricing.currency) continue;
-    rows.push(
+    for (const id_suffix of ID_SUFFIXES) rows.push(
       to_csv_row([
-        product.id.toString(),
+        product.id.toString() + id_suffix,
         product.product_name,
         get_description(product) || product.product_name,
         "in stock",
