@@ -28,7 +28,7 @@ import CountrySelector from "@/components/country-selector";
 // meta pixel
 import Script from "next/script";
 
-const META_PIXEL_ID = "861050117030667";
+const META_PIXEL_ID = "1451206120203477";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
