@@ -4,6 +4,8 @@ export const dynamic = "force-dynamic";
 
 const BRAND = "Med za mršavljenje";
 const LOCALE = "bs";
+// ids of the feed-only test products start here, well away from the cms product ids
+const TEST_ID_START = 9001;
 
 const COUNTRIES = ["bosnia", "macedonia", "serbia", "europe", "america"] as const;
 type Country = (typeof COUNTRIES)[number];
@@ -74,25 +76,30 @@ export async function GET(request: Request) {
     ]),
   ];
 
-  for (const product of [...products.docs].sort((a, b) => a.id - b.id)) {
-    const pricing = get_country_price(product, country);
-    if (pricing.standart_price == null || !pricing.currency) continue;
-    rows.push(
-      to_csv_row([
-        product.id.toString(),
-        product.product_name,
-        get_description(product) || product.product_name,
-        "in stock",
-        "new",
-        format_price(pricing.standart_price, pricing.currency),
-        pricing.sale_price != null
-          ? format_price(pricing.sale_price, pricing.currency)
-          : "",
-        `${origin}/${LOCALE}/product/${product.id}`,
-        origin + get_product_image(product),
-        BRAND,
-      ])
-    );
+  const sorted_products = [...products.docs].sort((a, b) => a.id - b.id);
+  // real products first, then one feed-only test copy of each (not shown on the website)
+  for (const is_test of [false, true]) {
+    for (let index = 0; index < sorted_products.length; index++) {
+      const product = sorted_products[index];
+      const pricing = get_country_price(product, country);
+      if (pricing.standart_price == null || !pricing.currency) continue;
+      rows.push(
+        to_csv_row([
+          is_test ? (TEST_ID_START + index).toString() : product.id.toString(),
+          is_test ? `${product.product_name} (Test)` : product.product_name,
+          get_description(product) || product.product_name,
+          "in stock",
+          "new",
+          format_price(pricing.standart_price, pricing.currency),
+          pricing.sale_price != null
+            ? format_price(pricing.sale_price, pricing.currency)
+            : "",
+          `${origin}/${LOCALE}/product/${product.id}`,
+          origin + get_product_image(product),
+          BRAND,
+        ])
+      );
+    }
   }
 
   return new Response(rows.join("\r\n") + "\r\n", {
