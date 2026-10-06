@@ -114,16 +114,12 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 fbq('init', '${META_PIXEL_ID}');
 fbq('track', 'PageView');`}
         </Script>
-        <noscript>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            height="1"
-            width="1"
-            style={{ display: "none" }}
-            alt=""
-            src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`}
-          />
-        </noscript>
+        {/* raw html so react doesn't preload the image when js is enabled */}
+        <noscript
+          dangerouslySetInnerHTML={{
+            __html: `<img height="1" width="1" style="display:none" alt="" src="https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1" />`,
+          }}
+        />
         <ReactQueryClientProvider>
           <UserProvider>
             <CountryProvider>
