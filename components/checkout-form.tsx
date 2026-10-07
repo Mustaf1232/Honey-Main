@@ -122,12 +122,15 @@ export default function CheckoutForm({
       },
     };
     try {
-      await place_order(order_object);
-      track_meta_event("Purchase", {
-        items: get_pixel_items(),
-        value: cart_data!.total,
-        currency: cart_data!.currency,
-      });
+      const order = await place_order(order_object);
+      // the cms answers with an errors array when it rejects the order
+      if (!order?.errors) {
+        track_meta_event("Purchase", {
+          items: get_pixel_items(),
+          value: cart_data!.total,
+          currency: cart_data!.currency,
+        });
+      }
       setIsSuccess(true);
       clear_cart_contents({ cart_key: cart_data!.id });
       set_first_order_false();
